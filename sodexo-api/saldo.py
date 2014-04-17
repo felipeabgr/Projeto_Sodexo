@@ -11,9 +11,15 @@ import requests
 POST_URL = 'https://sodexosaldocartao.com.br/saldocartao/consultaSaldo.do?operation=consult'
 CAPTCHA_URL = 'https://sodexosaldocartao.com.br/saldocartao/jcaptcha.do'
 
-
 def parse_html(html):
     soup = BeautifulSoup(html)
+
+    print "-------------------"
+
+    for link in soup.find_all(id='balance'):
+        balance = link.find('var')
+        print balance.string
+        print "end"
 
     errors = soup.find(class_='textRed')
     if errors:
