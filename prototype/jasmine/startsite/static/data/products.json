@@ -1,0 +1,10 @@
+{
+    "success": true,
+
+    "products": [
+        { "id": '1',  "name":'aaa',  "price":'5'  },
+        { "id": '2',  "name":'bbb',  "price":'6' },
+        { "id": '3', "name":'ccc',  "price":'7'  },
+        { "id": '4', "name":'ddd', "price":'8'  }
+    ]
+}
