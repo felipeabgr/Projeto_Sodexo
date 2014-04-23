@@ -3,12 +3,16 @@ Ext.Loader.setConfig({
 });
 
 Ext.application({
+    requires: ['Ext.container.Viewport'],
+    name: 'Prod',
+
+    appFolder: 'app',
+
     controller: [
         'ProductController'
     ],
 
     autoCreateViewport: true,
-    name: 'JasmineExample',
 
     launch: function() {
             jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
