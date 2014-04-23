@@ -16,7 +16,7 @@ Ext.define('Prod.controller.ProductController',{
 
     init : function(){
         this.control({
-            
+
             'productlist button[action=new]': {
                 click: this.addProduct
             },
