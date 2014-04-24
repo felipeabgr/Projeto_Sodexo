@@ -5,7 +5,7 @@ Ext.define('Test.spec.ProductModelAssumptions', {}, function() {
     });
 
     afterEach(function() {
-       // Ext.data.Model.cache = {};
+        Ext.data.Model.cache = {};
     });
 
     describe('Prod.model.Product model', function() {
