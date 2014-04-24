@@ -1,7 +1,7 @@
 Ext.define('Prod.store.Products', {
     extend:'Ext.data.Store',
     model: 'Prod.model.Product',
-    
+
     autoLoad: true,
 
     proxy: {
