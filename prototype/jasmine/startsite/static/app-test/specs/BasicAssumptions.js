@@ -6,5 +6,9 @@ Ext.define('Test.spec.BasicAssumptions', {}, function() {
             expect(Ext.getVersion()).toBeTruthy();
             expect(Ext.getVersion().major).toEqual(4);
         });
+
+        it("Prod code should be loaded", function() {
+            expect(Prod).toBeDefined();
+        });
     });
 });
