@@ -9,29 +9,30 @@ Ext.define('Test.spec.ProductModelAssumptions', {}, function() {
     });
 
     describe('Prod.model.Product model', function() {
-        it('exists', function() {
+        it('Exists', function() {
             var model = Ext.create('Prod.model.Product', {});
             expect(model.$className).toEqual('Prod.model.Product');
         });
-        /*it('has properties', function() { 
-            var model = Ext.create('SSC.model.Campaign', {
-                title: 'Donors meeting',
-                description: 'Donors meeting agenda',
-                location: 'New York City'
+
+        it('Has properties', function() {
+            var model = Ext.create('Prod.model.Product', {
+                name: 'Product Test 1',
+                price: 25.5
             });
-            expect(model.get('title')).toEqual('Donors meeting');
-            expect(model.get('description')).toEqual('Donors meeting agenda');
-            expect(model.get('location')).toEqual('New York City');
+            expect(model.get('name')).toEqual('Product Test 1');
+            expect(model.get('price')).toEqual(25.5);
         });
-        it('property title has default values', function() { 
-            var model = Ext.create('SSC.model.Campaign');
-            expect(model.get('title')).toEqual('Default Campaign Title');
+
+        it('Property description has default values', function() {
+            var model = Ext.create('Prod.model.Product');
+            expect(model.get('description')).toEqual('Default description');
         });
-        it('requires campaign location', function() { 
-            var model = Ext.create('SSC.model.Campaign');
+
+        it('Requires product name', function() {
+            var model = Ext.create('Prod.model.Product');
             var validationResult = model.validate();
             expect(validationResult.isValid()).toBeFalsy();
-        });*/
+        });
     });
 
 });
