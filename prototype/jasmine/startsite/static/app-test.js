@@ -12,9 +12,14 @@ Ext.application({
         'ProductController'
     ],
 
-    autoCreateViewport: true,
+    autoCreateViewport: false,
 
     launch: function() {
+            Ext.create('Ext.container.Viewport', {
+                items: {
+                xtype: 'mainview'
+            }});
+
             jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
             jasmine.getEnv().execute();
     }
