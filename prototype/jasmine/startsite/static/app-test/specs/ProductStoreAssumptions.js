@@ -15,9 +15,10 @@ Ext.define('Test.spec.ProductStoreAssumptions', {}, function() {
         it('It has the store loaded', function() {
             var prodStore = Ext.create('Prod.store.Products');
             prodStore.load();
-            expect(prodStore.getCount()).toBeGreaterThan(0);
+            setTimeout(function () {
+                expect(prodStore.getCount()).toBeGreaterThan(0);
+            }, 250);
 
-            expect(true).toBe(true);
         });
 
         it('1st Element', function() {
@@ -33,8 +34,10 @@ Ext.define('Test.spec.ProductStoreAssumptions', {}, function() {
                     }
                 }
             });
-            waits(1000);
-            expect(contact.data.id).toEqual(1);
+            setTimeout(function () {
+                expect(contact.data.id).toEqual(1);
+            }, 250);
+
         });
 
 
