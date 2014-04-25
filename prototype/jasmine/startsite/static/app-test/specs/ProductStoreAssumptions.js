@@ -1,12 +1,22 @@
 Ext.define('Test.spec.ProductStoreAssumptions', {}, function() {
     'use strict';
-    beforeEach(function() {
+    /*beforeEach(function() {
+        console.log('beforeeach called!');
     });
 
     afterEach(function() {
-    });
+        console.log('aftereach called!');
+    });*/
 
     describe('Prod.store.Products Store', function() {
+        beforeEach(function() {
+            console.log('aaaaaaa');
+        });
+
+        afterEach(function() {
+            console.log('bbbbbbb');
+        });
+
         it('It Exists',function() {
             var prodStore = Ext.create('Prod.store.Products');
             expect(prodStore.$className).toEqual('Prod.store.Products');
@@ -36,7 +46,8 @@ Ext.define('Test.spec.ProductStoreAssumptions', {}, function() {
             });
             setTimeout(function () {
                 expect(contact.data.id).toEqual(1);
-            }, 250);
+            }, 1);
+
 
         });
 
