@@ -1,8 +1,4 @@
 describe('Product model', function() {
-    beforeEach(function() {
-
-    });
-
     afterEach(function() {
         Ext.data.Model.cache = {};
     });

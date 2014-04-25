@@ -1,9 +1,4 @@
 describe('Products Store', function() {
-    beforeEach(function() {
-    });
-
-    afterEach(function() {
-    });
     it('should exists',function() {
         var prodStore = Ext.create('Prod.store.Products');
         expect(prodStore.$className).toEqual('Prod.store.Products');
