@@ -6,7 +6,8 @@ Ext.application({
 
     controllers: [
         'ProductController',
-        'NewController'
+        'NewController',
+        'MyController'
     ],
 
     launch: function() {

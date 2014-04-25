@@ -1,4 +1,4 @@
-Ext.define('Test.spec.ProductModelAssumptions', {}, function() {
+Ext.define('Test.spec.ProductModelSpec', {}, function() {
     'use strict';
     beforeEach(function() {
 
@@ -8,13 +8,13 @@ Ext.define('Test.spec.ProductModelAssumptions', {}, function() {
         Ext.data.Model.cache = {};
     });
 
-    describe('Prod.model.Product model', function() {
-        it('Exists', function() {
+    describe('Product model', function() {
+        it('exists', function() {
             var model = Ext.create('Prod.model.Product', {});
             expect(model.$className).toEqual('Prod.model.Product');
         });
 
-        it('Has properties', function() {
+        it('has properties', function() {
             var model = Ext.create('Prod.model.Product', {
                 name: 'Product Test 1',
                 price: 25.5
@@ -23,12 +23,12 @@ Ext.define('Test.spec.ProductModelAssumptions', {}, function() {
             expect(model.get('price')).toEqual(25.5);
         });
 
-        it('Property description has default values', function() {
+        it('property description has default values', function() {
             var model = Ext.create('Prod.model.Product');
             expect(model.get('description')).toEqual('Default description');
         });
 
-        it('Requires product name', function() {
+        it('requires product name', function() {
             var model = Ext.create('Prod.model.Product');
             var validationResult = model.validate();
             expect(validationResult.isValid()).toBeFalsy();
