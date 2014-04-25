@@ -1,14 +1,12 @@
-Ext.define('Test.spec.ProductModelSpec', {}, function() {
-    'use strict';
-    beforeEach(function() {
-
-    });
-
-    afterEach(function() {
-        Ext.data.Model.cache = {};
-    });
-
     describe('Product model', function() {
+        beforeEach(function() {
+
+        });
+
+        afterEach(function() {
+            Ext.data.Model.cache = {};
+        });
+
         it('exists', function() {
             var model = Ext.create('Prod.model.Product', {});
             expect(model.$className).toEqual('Prod.model.Product');
@@ -34,5 +32,3 @@ Ext.define('Test.spec.ProductModelSpec', {}, function() {
             expect(validationResult.isValid()).toBeFalsy();
         });
     });
-
-});

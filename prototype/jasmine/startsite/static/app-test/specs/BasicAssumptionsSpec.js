@@ -1,4 +1,4 @@
-Ext.define('Test.spec.BasicAssumptions', {}, function() {
+
     describe("Basic Assumptions", function() {
 
         it("has ExtJS4 loaded", function() {
@@ -11,4 +11,3 @@ Ext.define('Test.spec.BasicAssumptions', {}, function() {
             expect(Prod).toBeDefined();
         });
     });
-});
