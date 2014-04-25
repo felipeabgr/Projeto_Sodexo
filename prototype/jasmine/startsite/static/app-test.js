@@ -8,19 +8,5 @@ Ext.application({
 
     appFolder: 'app',
 
-    controller: [
-        'ProductController'
-    ],
-
-    autoCreateViewport: false,
-
-    launch: function() {
-            Ext.create('Ext.container.Viewport', {
-                items: {
-                xtype: 'mainview'
-            }});
-
-            jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-            jasmine.getEnv().execute();
-    }
+    autoCreateViewport: false
 });
