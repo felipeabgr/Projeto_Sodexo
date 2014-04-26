@@ -35,19 +35,22 @@ describe('Products Store', function() {
 });
 
 describe('Prod.store.Products Store Fake Ajax', function() {
+    var prodStore = null;
 
-    it("should make an AJAX request to the correct URL", function() {
-        spyOn($, "ajax");
-        getProduct(1);
-        expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("/products/1");
+    beforeEach(function() {
+      jasmine.Ajax.install();
     });
 
-    function getProduct(id) {
-        $.ajax({
-            type: "GET",
-            url: "/products/" + id,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        });
-    }
+    afterEach(function() {
+      jasmine.Ajax.uninstall();
+    });
+
+    it('should make an AJAX request to the correct URL', function() {
+
+        prodStore = Ext.create('Prod.store.Products');
+        prodStore.load();
+
+        expect(jasmine.Ajax.requests.mostRecent().url).toContain('/static/data/products.json');
+
+    });
 });
