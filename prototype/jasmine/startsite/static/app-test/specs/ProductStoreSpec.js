@@ -1,11 +1,12 @@
-describe('Prod.store.Products Store', function() {
+describe('Products Store', function() {
+    it('should exists',function() {
 
-    it('It Exists',function() {
         var prodStore = Ext.create('Prod.store.Products');
         expect(prodStore.$className).toEqual('Prod.store.Products');
     });
 
-    it('It has the store loaded', function() {
+
+    it('it has the store loaded', function() {
         var prodStore = Ext.create('Prod.store.Products');
         prodStore.load();
         setTimeout(function () {
