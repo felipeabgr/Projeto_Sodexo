@@ -53,4 +53,14 @@ describe('Prod.store.Products Store Fake Ajax', function() {
         expect(jasmine.Ajax.requests.mostRecent().url).toContain('/static/data/products.json');
 
     });
+
+    it('should load fixture data', function() {
+
+        //var fixture = loadFixtures('data.html');
+        var fixture = setFixtures('<ul id="list"><li>item 01</li><li>item 02</li></ul>');
+        console.log('FIXTURE: '+fixture);
+        expect($('#list').length).toBe(1);
+
+    });
+    
 });
