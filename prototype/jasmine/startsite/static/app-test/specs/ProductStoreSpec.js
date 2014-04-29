@@ -58,9 +58,7 @@ describe('Prod.store.Products Store Fake Ajax', function() {
 
         //var fixture = loadFixtures('data.html');
         var fixture = setFixtures('<ul id="list"><li>item 01</li><li>item 02</li></ul>');
-        console.log('FIXTURE: '+fixture);
         expect($('#list').length).toBe(1);
-
     });
-    
+
 });
