@@ -1,0 +1,5 @@
+*.pyc
+*.sublime-workspace
+*.sublime-project
+websodexoapp/coverage/
+
