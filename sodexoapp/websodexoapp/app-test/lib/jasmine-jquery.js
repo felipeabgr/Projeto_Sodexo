@@ -44,7 +44,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   jasmine.Fixtures = function () {
     this.containerId = 'jasmine-fixtures'
     this.fixturesCache_ = {}
-    this.fixturesPath = 'spec/javascripts/fixtures'
+    //this.fixturesPath = 'spec/javascripts/fixtures'
+    this.fixturesPath = './app-test/fixtures'
   }
 
   jasmine.Fixtures.prototype.set = function (html) {
