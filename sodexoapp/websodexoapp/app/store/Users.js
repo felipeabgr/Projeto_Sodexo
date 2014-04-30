@@ -5,7 +5,14 @@ Ext.define('Sodexoapp.store.User',{
     autoLoad: true,
 
     proxy: {
-        type:'ajax'
+        type: 'rest',
+        url: '',
+
+        reader: {
+            type: 'json',
+            root: 'result',
+            successProperty: 'success'
+        }
 
     }
 

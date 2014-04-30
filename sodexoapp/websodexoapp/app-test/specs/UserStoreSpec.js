@@ -9,7 +9,7 @@ describe('Store User', function() {
       jasmine.Ajax.uninstall();
     });*/
 
-    it('make an AJAX request to the correct URL', function() {
+    it('makes an AJAX request to the correct URL', function() {
         jasmine.Ajax.install();
         //var store = Ext.create('Sodexoapp.store.User');
         //store.load();
@@ -27,9 +27,12 @@ describe('Store User', function() {
         jasmine.Ajax.uninstall();
     });
 
-    it('load a fixture', function(){
+    it('loads a fixture', function(){
         loadFixtures('data.html');
-        expect($('#list').length).toBe(1);
+        expect($('#user1').length).toBe(1);
+        expect($('#user1').children()[0].innerText).toEqual('User1');
+        expect($('#user1').children()[1].innerText).toEqual('Password1');
+        expect($('#user1').children()[2].innerText).toEqual('Email1');
     });
 
 
