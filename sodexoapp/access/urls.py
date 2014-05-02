@@ -1,7 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls.defaults import *
 
-from access import views
+#from access import views
 
-urlpatterns = patterns('',
-    url(r'^$', views.index, name='index')
+urlpatterns += patterns('',
+    url(r'login', 'access.views.do_login'),
+    url(r'logout', 'access.views.do_logout')
 )
