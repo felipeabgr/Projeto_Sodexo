@@ -6,12 +6,10 @@ from django.shortcuts import render_to_response
 
 @login_required
 def show_system(request):
-    print "show"
-    return render_to_response('main.html')
+    return render_to_response('index.html')
 
 def do_login(request):
     if request.method == 'GET':
-        print "GET error"
         error_msg = request.GET.get('error_msg', '')
         return render_to_response('login.html',
                             {'error_msg': error_msg})
