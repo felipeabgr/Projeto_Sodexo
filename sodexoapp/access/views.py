@@ -4,9 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 
+
 @login_required
 def show_system(request):
     return render_to_response('index.html')
+
 
 def do_login(request):
     if request.method == 'GET':
