@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model, SESSION_KEY
 User = get_user_model()
 
+
 class AccessAuthorizationDjangoTest(TestCase):
     fixtures = ['basic_auth.yaml']
 
@@ -22,13 +23,13 @@ class AccessAuthorizationDjangoTest(TestCase):
 
     def test_login_authorized(self):
         ret = self.client.post('/access/login',
-            {'username': 'admin','password': 'admin'}, follow=True)
+            {'username': 'admin', 'password': 'admin'}, follow=True)
         self.assertEquals(ret.status_code, 200, 'Wrong status code.')
         self.assertFalse('error_msg' in ret.context)
 
     def test_login_not_authorized(self):
         ret = self.client.post('/access/login',
-            {'username': 'admin','password': 'ssss'})
+            {'username': 'admin', 'password': 'ssss'})
 
         self.assertEquals(ret.status_code, 200, 'Wrong status code.')
         self.assertTrue('error_msg' in ret.context)
@@ -39,21 +40,19 @@ class AccessAuthorizationDjangoTest(TestCase):
         m_authenticate.return_value = None
 
         ret = self.client.post('/access/login',
-            {'username': 'admin','password': 'admin'},
+            {'username': 'admin', 'password': 'admin'},
          follow=True)
 
         self.assertTrue('error_msg' in ret.context)
-
 
     @patch('access.views.authenticate')
     def test_calls_authenticate_with_assertion_from_post(
         self, mock_authenticate):
         mock_authenticate.return_value = None
         self.client.post('/access/login',
-            {'username':'admin','password': 'admin'})
+            {'username': 'admin', 'password': 'admin'})
         mock_authenticate.assert_called_once_with(username='admin',
             password='admin')
-
 
     @patch('access.views.authenticate')
     def test_gets_logged_in_session_if_authenticate_returns_a_user(
@@ -62,14 +61,13 @@ class AccessAuthorizationDjangoTest(TestCase):
         mock_authenticate.return_value = user
         user.backend = ''
         self.client.post('/access/login',
-            {'username':'adasmin','password': 'admin'})
+            {'username': 'adasmin', 'password': 'admin'})
         self.assertEqual(self.client.session[SESSION_KEY], user.pk)
-
 
     @patch('access.views.authenticate')
     def test_does_not_get_logged_in_if_authenticate_returns_None(
         self, mock_authenticate):
         mock_authenticate.return_value = None
         self.client.post('/access/login',
-            {'username':'adasmin','password': 'admin'})
+            {'username': 'adasmin', 'password': 'admin'})
         self.assertNotIn(SESSION_KEY, self.client.session)
