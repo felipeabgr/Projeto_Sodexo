@@ -23,6 +23,13 @@ DATABASES = {
     }
 }
 
+
+EMAIL_USE_TLS = False
+EMAIL_HOST = '192.168.10.11'
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 25
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
