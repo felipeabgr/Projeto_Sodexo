@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 
 from mail import send_generic_mail
 
+
 @login_required
 def show_system(request):
     return render_to_response('index.html')
@@ -33,6 +34,7 @@ def do_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def email(request):
     a = send_generic_mail('teste', 'teste', ['tiagohl@outlook.com'])
-    return HttpResponse('ok! '+str(a))
+    return HttpResponse('ok! ' + str(a))

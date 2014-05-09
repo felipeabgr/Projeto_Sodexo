@@ -75,6 +75,7 @@ class AccessAuthorizationDjangoTest(TestCase):
             {'username': 'adasmin', 'password': 'admin'})
         self.assertNotIn(SESSION_KEY, self.client.session)
 
+
 class SendMailTest(TestCase):
 
     def test_email_was_sent(self):
