@@ -1,16 +1,14 @@
 Ext.define('Sodexoapp.store.Users',{
     extend:'Ext.data.Store',
     model: 'Sodexoapp.model.User',
-
     proxy: {
         type: 'rest',
-        url: '/access/user',
+        url: '/access/users',
 
         reader: {
-            root: 'result',
+            type: 'json',
+            root: 'users',
             successProperty: 'success'
         }
-
     }
-
 });
