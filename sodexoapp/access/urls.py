@@ -1,7 +1,8 @@
-from django.conf.urls import patterns, url
+# coding=utf-8
+from django.conf.urls import *
 
-from access import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index')
+    url(r'login', 'access.views.do_login'),
+    url(r'logout', 'access.views.do_logout')
 )
