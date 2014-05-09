@@ -33,7 +33,7 @@ describe('Store User', function() {
             store.on('load', function(store){
                 var userFake = store.data.items[0].data;
                 idFn(userFake.id);
-                usernameFn(userFake.user);
+                usernameFn(userFake.username);
                 emailFn(userFake.email);
                 passwordFn(userFake.password);
             });
@@ -45,10 +45,13 @@ describe('Store User', function() {
             mockedRequest.response({
                 status:       200,
                 responseText: "{success: 'aa',"+
-                               "users: [{ id: '1',"+
-                               "user: 'zoio',"+
-                               "email: 'leandroc@inatel.br',"+
-                               "password: 'svcfasasdasd'}]}"
+                               "users: ["+
+                                   "{"+
+                                       "id: '1',"+
+                                       "username: 'zoio',"+
+                                       "email: 'leandroc@inatel.br',"+
+                                       "password: 'svcfasasdasd'}"+
+                                "]}"
             });
 
             expect(idFn).toHaveBeenCalledWith(1);
@@ -73,14 +76,18 @@ describe('Store User', function() {
             mockedRequest.response({
                 status:       200,
                 responseText: "{success: 'aa',"+
-                               "users: [{ id: '1',"+
-                               "user: 'zoio',"+
-                               "email: 'leandroc@inatel.br',"+
-                               "password: 'svcfasasdasd'},"+
-                               "{ id: '2',"+
-                               "user: 'corvo',"+
-                               "email: 'felipe.douglas@inatel.br',"+
-                               "password: 'fkfkfkfkfkfkfk'}]}"
+                               "users: ["+
+                                   "{"+
+                                       "id: '1',"+
+                                       "username: 'zoio',"+
+                                       "email: 'leandroc@inatel.br',"+
+                                       "password: 'svcfasasdasd'},"+
+                                   "{"+
+                                       "id: '2',"+
+                                       "username: 'corvo',"+
+                                       "email: 'felipe.douglas@inatel.br',"+
+                                       "password: 'fkfkfkfkfkfkfk'}"+
+                                "]}"
             });
 
             expect(countFn).toHaveBeenCalledWith(2);
