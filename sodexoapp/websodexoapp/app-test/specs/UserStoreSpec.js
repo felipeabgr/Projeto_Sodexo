@@ -22,7 +22,7 @@ describe('Store User', function() {
             expect(jasmine.Ajax.requests.mostRecent().url).toContain('/access/user');
         });
 
-        it('Makes an REST request to the test the response data', function() {
+        it('makes an REST request to test the response data', function() {
             var idFn = jasmine.createSpy("success");
             var usernameFn = jasmine.createSpy("success");
             var emailFn = jasmine.createSpy("sucess");
@@ -55,6 +55,35 @@ describe('Store User', function() {
             expect(usernameFn).toHaveBeenCalledWith('zoio');
             expect(emailFn).toHaveBeenCalledWith('leandroc@inatel.br');
             expect(passwordFn).toHaveBeenCalledWith('svcfasasdasd');
+        });
+
+        it('makes an REST request to load more than one user', function() {
+            var countFn = jasmine.createSpy("success");
+
+            var store = Ext.create('Sodexoapp.store.Users');
+
+            store.on('load', function(store){
+                countFn(store.data.length);
+            });
+
+            store.load();
+
+            var mockedRequest = jasmine.Ajax.requests.mostRecent();
+
+            mockedRequest.response({
+                status:       200,
+                responseText: "{success: 'aa',"+
+                               "users: [{ id: '1',"+
+                               "user: 'zoio',"+
+                               "email: 'leandroc@inatel.br',"+
+                               "password: 'svcfasasdasd'},"+
+                               "{ id: '2',"+
+                               "user: 'corvo',"+
+                               "email: 'felipe.douglas@inatel.br',"+
+                               "password: 'fkfkfkfkfkfkfk'}]}"
+            });
+
+            expect(countFn).toHaveBeenCalledWith(2);
         });
     });
 });
