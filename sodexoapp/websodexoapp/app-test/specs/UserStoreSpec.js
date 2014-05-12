@@ -22,7 +22,7 @@ describe('Store User', function() {
             expect(jasmine.Ajax.requests.mostRecent().url).toContain('/access/user');
         });
 
-        it('makes an REST request to test the response data', function() {
+        it('makes a REST request to test the response data', function() {
             var idFn = jasmine.createSpy("success");
             var usernameFn = jasmine.createSpy("success");
             var emailFn = jasmine.createSpy("sucess");
@@ -44,7 +44,7 @@ describe('Store User', function() {
 
             mockedRequest.response({
                 status:       200,
-                responseText: "{success: 'aa',"+
+                responseText: "{success: 'true',"+
                                "users: ["+
                                    "{"+
                                        "id: '1',"+
@@ -60,7 +60,7 @@ describe('Store User', function() {
             expect(passwordFn).toHaveBeenCalledWith('svcfasasdasd');
         });
 
-        it('makes an REST request to load more than one user', function() {
+        it('makes a REST request to load more than one user', function() {
             var countFn = jasmine.createSpy("success");
 
             var store = Ext.create('Sodexoapp.store.Users');
@@ -75,7 +75,7 @@ describe('Store User', function() {
 
             mockedRequest.response({
                 status:       200,
-                responseText: "{success: 'aa',"+
+                responseText: "{success: 'true',"+
                                "users: ["+
                                    "{"+
                                        "id: '1',"+
