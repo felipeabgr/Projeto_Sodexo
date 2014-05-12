@@ -71,3 +71,10 @@ class AccessAuthorizationDjangoTest(TestCase):
         self.client.post('/access/login',
             {'username': 'adasmin', 'password': 'admin'})
         self.assertNotIn(SESSION_KEY, self.client.session)
+
+
+class ForgetPasswordMailTest(TestCase):
+    fixtures = ['basic_auth.yaml']
+
+    def test_get(self):
+        self.client.get('/access/newpasswardemail')
