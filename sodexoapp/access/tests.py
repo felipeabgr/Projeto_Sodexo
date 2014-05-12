@@ -1,5 +1,6 @@
 #coding: utf-8
 from mock import patch
+import os
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model, SESSION_KEY
@@ -78,10 +79,6 @@ class AccessAuthorizationDjangoTest(TestCase):
 
 class SendMailTest(TestCase):
 
-    def test_email_was_sent(self):
-        a = self.client.get('/access/email')
-        self.assertContains(a, 'ok! 1')
-
     def test_email_params(self):
         send_generic_mail('Este é o assunto', 'Esta é a menssagem',
          ['tiagohl@outlook.com', '123@exemplo.com'])
@@ -90,3 +87,8 @@ class SendMailTest(TestCase):
         self.assertEqual(mail.outbox[0].subject, 'Este é o assunto')
         self.assertEqual(mail.outbox[0].body, 'Esta é a menssagem')
         self.assertEquals(mail.outbox[0].to[0], 'tiagohl@outlook.com')
+        self.assertEquals(mail.outbox[0].to[1], '123@exemplo.com')
+
+    def test_raise_value_error(self):
+        self.assertRaises(ValueError, send_generic_mail, 'Este é o assunto',
+                                'Esta é a menssagem', ['tiagoh@inatel.br', ''])

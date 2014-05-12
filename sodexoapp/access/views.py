@@ -1,10 +1,8 @@
 # coding=utf-8
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-
-from mail import send_generic_mail
 
 
 @login_required
@@ -33,8 +31,3 @@ def do_login(request):
 def do_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
-
-
-def email(request):
-    a = send_generic_mail('teste', 'teste', ['tiagohl@outlook.com'])
-    return HttpResponse('ok! ' + str(a))
