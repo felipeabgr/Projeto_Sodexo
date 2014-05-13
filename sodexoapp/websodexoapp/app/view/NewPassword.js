@@ -11,10 +11,10 @@ Ext.define('Sodexoapp.view.NewPassword', {
         '->',
         {
             xtype:'button',
-            itemId:'verifyButton',
-            text:'Verificar Email',
+            itemId:'sendEmailBtn',
+            text:'Enviar',
             textAling:'center',
-            action:'verify'
+            action:'send'
         }
     ],
 
@@ -26,12 +26,16 @@ Ext.define('Sodexoapp.view.NewPassword', {
                 itemId:'emailField',
                 fieldLabel:'Email',
                 allowBlank:false,
+                msgTarget: 'under',
+                invalidText: 'Invalid Email',
+                vtype: 'email',
+                vtypeText: 'invalid email Format',
                 margin: '20 0 0 20'
             }
         ];
 
         this.callParent(arguments);
         this.emailField = this.down('[itemId=emailField]');
-        this.verifyButton = this.down('[itemId=verifyButton]');
+        this.verifyButton = this.down('[itemId=sendEmailBtn]');
     }
 });

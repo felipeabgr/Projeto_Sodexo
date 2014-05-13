@@ -4,6 +4,10 @@ Ext.application({
 
     appFolder: 'static/app',
 
+    controllers: [
+        'User',
+    ],
+
     launch: function() {
         Ext.create('Ext.container.Viewport', {
             layout: 'fit',
