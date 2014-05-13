@@ -5,17 +5,15 @@ Ext.define('Sodexoapp.controller.User', {
         'NewPassword'
     ],
 
-    refs: [{
-        ref: 'myView',
-        selector: 'newpassword'
-    }, {
-        ref: 'myViewButtonVerify',
-        selector: 'newpassword > button[text=Verificar Email]'
-    }],
+    refs: [
+        {ref: 'myView', selector: 'newpassword'},
+        {ref: 'myVerifyButton', selector: 'newpassword #verifyButton'},
+        {ref: 'emailField', selector: 'newpassword #emailField'}
+    ],
 
     init : function(){
         this.control({
-            'newpassword button[action=verify]':{
+            'newpassword #verifyButton':{
                 click: this.verifyEmail
             }
         });
