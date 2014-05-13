@@ -1,5 +1,7 @@
 #coding: utf-8
 from mock import patch
+import json
+from access import factories
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model, SESSION_KEY
@@ -73,8 +75,25 @@ class AccessAuthorizationDjangoTest(TestCase):
         self.assertNotIn(SESSION_KEY, self.client.session)
 
 
-class ForgetPasswordMailTest(TestCase):
-    fixtures = ['basic_auth.yaml']
+class UserHandlerTest(TestCase):
+    #fixtures = ['basic_auth.yaml']
 
     def test_get(self):
-        self.client.get('/access/newpasswardemail')
+        ret = self.client.get('/access/user')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        user = factories.UserFactory.create()
+        print "XXXXXXXXXXXXXXXXXXX"
+        print user.email
+        print 'content................................'
+        content = json.loads(ret.content)
+        print content
+        self.assertEquals(content.get('total'), 3)
+
+        result = content.get('result')
+        print result
+        # for result_user in result:
+        #     ac_ids_handler.append(service_crit.get('id'))
