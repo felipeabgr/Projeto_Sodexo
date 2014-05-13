@@ -5,7 +5,7 @@ Ext.application({
     appFolder: 'static/app',
 
     controllers: [
-        'User',
+        'User'
     ],
 
     launch: function() {
@@ -14,7 +14,7 @@ Ext.application({
             items: [
                 {
                     xtype: 'panel',
-                    title: 'Users',
+                    title: 'Sodexo',
                     html : 'List of users will go here'
                 }
             ]
