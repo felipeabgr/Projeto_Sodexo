@@ -6,5 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^access/',include('access.urls')),
-    url(r'^$', 'access.views.show_system')
+    url(r'^$', 'access.views.show_system'),
+    url(r'^passwordrecover','sodexoapp.views.recover_password')
 )
