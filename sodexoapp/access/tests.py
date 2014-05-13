@@ -76,24 +76,25 @@ class AccessAuthorizationDjangoTest(TestCase):
 
 
 class UserHandlerTest(TestCase):
-    #fixtures = ['basic_auth.yaml']
 
-    def test_get(self):
+    def setUp(self):
+        super(UserHandlerTest, self).setUp()
+        factories.UserFactory.create(
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+    def test_get_list(self):
         ret = self.client.get('/access/user')
 
         self.assertEquals(ret.status_code, 200,
                           'Status_code incorreto(%d)\n'
                           'Content: \n%s' % (ret.status_code, ret.content))
 
-        user = factories.UserFactory.create()
-        print "XXXXXXXXXXXXXXXXXXX"
-        print user.email
-        print 'content................................'
         content = json.loads(ret.content)
-        print content
-        self.assertEquals(content.get('total'), 3)
+        self.assertEquals(content.get('total'), 1)
 
-        result = content.get('result')
-        print result
+        user = content.get('result')[0]
+        self.assertEquals(user.get('username'), 'usertest')
+        self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
         # for result_user in result:
         #     ac_ids_handler.append(service_crit.get('id'))
