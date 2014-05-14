@@ -4,13 +4,17 @@ Ext.application({
 
     appFolder: 'static/app',
 
+    controllers: [
+        'User'
+    ],
+
     launch: function() {
         Ext.create('Ext.container.Viewport', {
             layout: 'fit',
             items: [
                 {
                     xtype: 'panel',
-                    title: 'Users',
+                    title: 'Sodexo',
                     html : 'List of users will go here'
                 }
             ]

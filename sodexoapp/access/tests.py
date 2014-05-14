@@ -1,11 +1,15 @@
 #coding: utf-8
 from mock import patch
 import json
-from access import factories
-from access.changeUserPassword import ChangeUserPassword
+import os
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model, SESSION_KEY
+from django.core import mail
+
+from mail import send_generic_mail
+from access import factories
+from access.changeUserPassword import ChangeUserPassword
 User = get_user_model()
 
 
@@ -190,3 +194,20 @@ class ChangeUserPasswordTeste(TestCase):
         self.assertNotEquals(oldpass, newPass)
         newUser = User.objects.get(id=user.id)
         self.assertNotEquals(oldpass, newUser.password)
+
+
+class SendMailTest(TestCase):
+
+    def test_email_params(self):
+        send_generic_mail('Este é o assunto', 'Esta é a menssagem',
+         ['tiagohl@outlook.com', '123@exemplo.com'])
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Este é o assunto')
+        self.assertEqual(mail.outbox[0].body, 'Esta é a menssagem')
+        self.assertEquals(mail.outbox[0].to[0], 'tiagohl@outlook.com')
+        self.assertEquals(mail.outbox[0].to[1], '123@exemplo.com')
+
+    def test_raise_value_error(self):
+        self.assertRaises(ValueError, send_generic_mail, 'Este é o assunto',
+                                'Esta é a menssagem', ['tiagoh@inatel.br', ''])
