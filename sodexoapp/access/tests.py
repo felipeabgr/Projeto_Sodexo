@@ -4,7 +4,6 @@ import json
 from access import factories
 from access.changeUserPassword import ChangeUserPassword
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.contrib.auth import get_user_model, SESSION_KEY
 User = get_user_model()
@@ -185,19 +184,9 @@ class ChangeUserPasswordTeste(TestCase):
             id=1,
             username="usertest",
             email='usertest@sodexoapp.com')
-
+        oldpass = user.password
         cup = ChangeUserPassword()
-
-        newPass = cup.aplyChange(user.id)
-
-        self.assertNotEquals(user.password, newPass)
-
-        userdb = User.objects.get(id=user.id)
-
-        self.assertNotEquals(user.password, userdb.password)
-
-    def test_changed_failed(self):
-
-        cup = ChangeUserPassword()
-
-        self.assertRaises(DoesNotExist, cup.aplyChange(1))
+        newPass = cup.aplyChange(user)
+        self.assertNotEquals(oldpass, newPass)
+        newUser = User.objects.get(id=user.id)
+        self.assertNotEquals(oldpass, newUser.password)

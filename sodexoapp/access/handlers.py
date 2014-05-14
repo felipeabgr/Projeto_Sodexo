@@ -1,5 +1,7 @@
 # coding=utf-8
 from piston.handler import BaseHandler
+from access.changeUserPassword import ChangeUserPassword
+
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
@@ -29,6 +31,8 @@ class UserAuthenticationHandler(BaseHandler):
     def update(self, request, id):
         try:
             user = User.objects.get(id=id)
+            cup = ChangeUserPassword()
+            newPass = cup.aplyChange(user)
             return {'result':'Sua nova senha foi gerada com sucesso e enviada por email'}
         except ObjectDoesNotExist:
                 return HttpResponse('Not found', status=404)
