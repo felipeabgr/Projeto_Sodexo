@@ -42,6 +42,18 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
     },
 
     defineNewPassword : function(userId){
-
+        debugger;
+        Ext.Ajax.request({
+            url : '/access/userauthentication/'+userId,
+            method: 'PUT',
+            scope: this,
+            success: function(response, eOpts){
+                result = Ext.JSON.decode(response.responseText).total;
+                if(result === 0)
+                    console.log('sucess');
+                else
+                    console.log('failed');
+            }
+        });
     }
 });
