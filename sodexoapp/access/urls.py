@@ -5,10 +5,12 @@ from piston.resource import Resource
 from access import handlers
 
 user_handler = Resource(handlers.UserHandler)
+user_authentication_handler = Resource(handlers.UserAuthenticationHandler)
 
 urlpatterns = patterns('',
     url(r'login', 'access.views.do_login'),
     url(r'logout', 'access.views.do_logout'),
     url(r'^user/(?P<id>[0-9]+)$', user_handler),
     url(r'^user$', user_handler),
+    url(r'^userauthentication/(?P<id>[0-9]+)$', user_authentication_handler),
 )

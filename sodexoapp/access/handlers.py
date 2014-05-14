@@ -20,3 +20,15 @@ class UserHandler(BaseHandler):
         else:
             return dict (result=User.objects.all(),
                 total=User.objects.count())
+
+
+class UserAuthenticationHandler(BaseHandler):
+    allowed_methods = ('PUT',)
+    model = User
+
+    def update(self, request, id):
+        try:
+            user = User.objects.get(id=id)
+            return {'result':'Sua nova senha foi gerada com sucesso e enviada por email'}
+        except ObjectDoesNotExist:
+                return HttpResponse('Not found', status=404)

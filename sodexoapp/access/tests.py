@@ -2,7 +2,9 @@
 from mock import patch
 import json
 from access import factories
+from access.changeUserPassword import ChangeUserPassword
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.contrib.auth import get_user_model, SESSION_KEY
 User = get_user_model()
@@ -145,3 +147,57 @@ class UserHandlerTest(TestCase):
         content = json.loads(ret.content)
         self.assertEquals(content.get('total'), 0)
         self.assertEquals(content.get('result'), [])
+
+
+class UserAuthenticationHandlerTest(TestCase):
+
+    def test_recover_password_success(self):
+        factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.put('/access/userauthentication/1')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        content = json.loads(ret.content)
+        self.assertEquals(content.get('result'), 'Sua nova senha foi gerada '\
+            'com sucesso e enviada por email')
+
+    def test_recover_password_not_found(self):
+
+        ret = self.client.put('/access/userauthentication/1')
+
+        self.assertEquals(ret.status_code, 404,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        self.assertEquals(ret.content, 'Not found')
+
+
+class ChangeUserPasswordTeste(TestCase):
+
+    def test_changed_success(self):
+        user = factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        cup = ChangeUserPassword()
+
+        newPass = cup.aplyChange(user.id)
+
+        self.assertNotEquals(user.password, newPass)
+
+        userdb = User.objects.get(id=user.id)
+
+        self.assertNotEquals(user.password, userdb.password)
+
+    def test_changed_failed(self):
+
+        cup = ChangeUserPassword()
+
+        self.assertRaises(DoesNotExist, cup.aplyChange(1))
