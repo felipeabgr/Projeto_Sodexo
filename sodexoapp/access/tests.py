@@ -126,7 +126,7 @@ class UserHandlerTest(TestCase):
                           'Status_code incorreto(%d)\n'
                           'Content: \n%s' % (ret.status_code, ret.content))
 
-        self.assertEqual(json.loads(ret.content)['result'],{
+        self.assertEqual(json.loads(ret.content)['result'], {
                 u"username": u"usertest",
                 u"email": u"usertest@sodexoapp.com",
                 u"id": 1})

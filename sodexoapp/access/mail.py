@@ -11,5 +11,5 @@ def send_generic_mail(subject, message, to):
     try:
         return send_mail(subject, message, settings.SENDMAIL_FROM_ADDRESS, to,
                                                         fail_silently=False)
-    except SMTPException:
-        return "The message wasn't sent due to a SMTP server failure"
+    except SMTPException, e:
+        raise e
