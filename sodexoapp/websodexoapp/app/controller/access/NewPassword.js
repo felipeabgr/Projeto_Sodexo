@@ -32,10 +32,16 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
         if(email.getActiveErrors().length>0)
             console.log('there are errors');
         else
+            debugger;
             console.log('Email sent: '+email.getValue());
-        debugger;
-        var store = Ext.create('Sodexoapp.store.access.Users');
-        store.emailFilter(email.getValue());
-        result = store.load();
+            var store = Ext.create('Sodexoapp.store.access.Users');
+            store.emailFilter(email.getValue());
+            result = store.load();
+
+
+    },
+
+    defineNewPassword : function(userId){
+
     }
 });
