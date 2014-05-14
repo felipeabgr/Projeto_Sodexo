@@ -5,7 +5,7 @@ Ext.application({
     appFolder: 'static/app',
 
     controllers: [
-        'User'
+        'access.NewPassword'
     ],
 
     launch: function() {
