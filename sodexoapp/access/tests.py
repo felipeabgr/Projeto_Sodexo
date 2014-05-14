@@ -76,14 +76,11 @@ class AccessAuthorizationDjangoTest(TestCase):
 
 
 class UserHandlerTest(TestCase):
-
-    def setUp(self):
-        super(UserHandlerTest, self).setUp()
+    def test_get_list(self):
         factories.UserFactory.create(
             username="usertest",
             email='usertest@sodexoapp.com')
 
-    def test_get_list(self):
         ret = self.client.get('/access/user')
 
         self.assertEquals(ret.status_code, 200,
@@ -96,5 +93,55 @@ class UserHandlerTest(TestCase):
         user = content.get('result')[0]
         self.assertEquals(user.get('username'), 'usertest')
         self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
-        # for result_user in result:
-        #     ac_ids_handler.append(service_crit.get('id'))
+
+    def test_get_one(self):
+        factories.UserFactory.create(
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.get('/access/user/1')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        user = json.loads(ret.content).get('result')
+        self.assertEquals(user.get('username'), 'usertest')
+        self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
+
+    def test_get_allowed_fields(self):
+        factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.get('/access/user/1')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        self.assertEqual(json.loads(ret.content)['result'],{
+                u"username": u"usertest",
+                u"email": u"usertest@sodexoapp.com",
+                u"id": 1})
+
+    def test_get_one_not_found(self):
+        ret = self.client.get('/access/user/2')
+
+        self.assertEquals(ret.status_code, 404,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        self.assertEquals(ret.content, 'Not found')
+
+    def test_get_list_empty(self):
+        ret = self.client.get('/access/user')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        content = json.loads(ret.content)
+        self.assertEquals(content.get('total'), 0)
+        self.assertEquals(content.get('result'), [])
