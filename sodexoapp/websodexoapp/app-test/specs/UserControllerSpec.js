@@ -3,15 +3,15 @@ describe('Controller User', function() {
     var view;
 
     beforeEach(function () {
-        view = Ext.create('Sodexoapp.view.NewPassword');
-        ctr = Ext.create('Sodexoapp.controller.User');
+        view = Ext.create('Sodexoapp.view.access.NewPassword');
+        ctr = Ext.create('Sodexoapp.controller.access.NewPassword');
     });
 
     afterEach(function() {
     });
 
     it('should exist', function () {
-        expect(ctr.$className).toEqual('Sodexoapp.controller.User');
+        expect(ctr.$className).toEqual('Sodexoapp.controller.access.NewPassword');
     });
 
     it('should ref MyView', function() {

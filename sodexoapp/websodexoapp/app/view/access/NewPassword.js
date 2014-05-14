@@ -1,10 +1,6 @@
-Ext.define('Sodexoapp.view.NewPassword', {
+Ext.define('Sodexoapp.view.access.NewPassword', {
     extend:'Ext.panel.Panel',
     alias:'widget.newpassword',
-
-    // title:'NewPassword',
-    // height:150,
-    // width:400,
 
     title: 'Password Recover',
     width: 500,
@@ -35,6 +31,11 @@ Ext.define('Sodexoapp.view.NewPassword', {
                 invalidText: 'Invalid Email',
                 vtype: 'email',
                 vtypeText: 'invalid email Format',
+                listeners: {
+                    afterrender: function(field) {
+                        field.focus();
+                    }
+                },
                 margin: '20 0 0 20',
                 width:450
             }
