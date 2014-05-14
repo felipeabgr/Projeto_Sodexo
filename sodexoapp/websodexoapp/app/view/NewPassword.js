@@ -1,10 +1,15 @@
 Ext.define('Sodexoapp.view.NewPassword', {
-    extend:'Ext.window.Window',
+    extend:'Ext.panel.Panel',
     alias:'widget.newpassword',
 
-    title:'NewPassword',
+    // title:'NewPassword',
+    // height:150,
+    // width:400,
+
+    title: 'Password Recover',
+    width: 500,
     height:150,
-    width:400,
+    margin: '30 0 0 30',
 
 
     bbar: [
@@ -30,7 +35,8 @@ Ext.define('Sodexoapp.view.NewPassword', {
                 invalidText: 'Invalid Email',
                 vtype: 'email',
                 vtypeText: 'invalid email Format',
-                margin: '20 0 0 20'
+                margin: '20 0 0 20',
+                width:450
             }
         ];
 
