@@ -14,8 +14,7 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
     init : function(){
         this.control({
             'newpassword #sendEmailBtn':{
-                //click: this.sendEmail
-                click: this.defineNewPassword
+                click: this.sendEmail
             },
         });
     },
@@ -43,10 +42,7 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
     },
 
     defineNewPassword : function(userId){
-        debugger;
-        window.location = './access/login?report_msg='+responseText;
-
-        /*Ext.Ajax.request({
+        Ext.Ajax.request({
             url : '/access/userauthentication/'+userId,
             method: 'PUT',
             scope: this,
@@ -54,12 +50,8 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
                 window.location = './access/login?report_msg='+responseText;
             },
             failure: function(response, opts) {
-                Netvision.util.NotificationManager.error({
-                    title: gettext('Erro'),
-                    message: gettext('O servidor retornou uma mensagem de erro ao tentar calcular essa projeção.'),
-                    detail: response.statusText + "<br />" +  response.responseText
-                });
+               //TODO
             },
-        });*/
+        });
     }
 });
