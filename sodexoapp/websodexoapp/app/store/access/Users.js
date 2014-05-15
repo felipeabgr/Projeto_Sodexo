@@ -11,7 +11,7 @@ Ext.define('Sodexoapp.store.access.Users',{
 
     proxy: {
         type: 'rest',
-        url: '/access/users',
+        url: '/access/user',
 
         reader: {
             type: 'json',
