@@ -1,5 +1,6 @@
 #coding: utf-8
 from mock import patch
+import json
 import os
 
 from django.test import TestCase
@@ -7,6 +8,8 @@ from django.contrib.auth import get_user_model, SESSION_KEY
 from django.core import mail
 
 from mail import send_generic_mail
+from access import factories
+from access.changeUserPassword import ChangeUserPassword
 User = get_user_model()
 
 
@@ -75,6 +78,126 @@ class AccessAuthorizationDjangoTest(TestCase):
         self.client.post('/access/login',
             {'username': 'adasmin', 'password': 'admin'})
         self.assertNotIn(SESSION_KEY, self.client.session)
+
+
+class UserHandlerTest(TestCase):
+    def test_get_list(self):
+        factories.UserFactory.create(
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.get('/access/user')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        content = json.loads(ret.content)
+        self.assertEquals(content.get('total'), 1)
+
+        user = content.get('result')[0]
+        self.assertEquals(user.get('username'), 'usertest')
+        self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
+
+    def test_get_one(self):
+        factories.UserFactory.create(
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.get('/access/user/1')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        user = json.loads(ret.content).get('result')
+        self.assertEquals(user.get('username'), 'usertest')
+        self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
+
+    def test_get_allowed_fields(self):
+        factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.get('/access/user/1')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        self.assertEqual(json.loads(ret.content)['result'], {
+                u"username": u"usertest",
+                u"email": u"usertest@sodexoapp.com",
+                u"id": 1})
+
+    def test_get_one_not_found(self):
+        factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+        ret = self.client.get('/access/user/2')
+
+        self.assertEquals(ret.status_code, 404,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        self.assertEquals(ret.content, 'Not found')
+
+    def test_get_list_empty(self):
+        ret = self.client.get('/access/user')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        content = json.loads(ret.content)
+        self.assertEquals(content.get('total'), 0)
+        self.assertEquals(content.get('result'), [])
+
+
+class UserAuthenticationHandlerTest(TestCase):
+
+    def test_recover_password_success(self):
+        factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        ret = self.client.put('/access/userauthentication/1')
+
+        self.assertEquals(ret.status_code, 200,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        content = json.loads(ret.content)
+        self.assertEquals(content.get('result'), 'Sua nova senha foi gerada '\
+            'com sucesso e enviada por email')
+
+    def test_recover_password_not_found(self):
+
+        ret = self.client.put('/access/userauthentication/1')
+
+        self.assertEquals(ret.status_code, 404,
+                          'Status_code incorreto(%d)\n'
+                          'Content: \n%s' % (ret.status_code, ret.content))
+
+        self.assertEquals(ret.content, 'Not found')
+
+
+class ChangeUserPasswordTeste(TestCase):
+
+    def test_changed_success(self):
+        user = factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+        oldpass = user.password
+        cup = ChangeUserPassword()
+        newPass = cup.aplyChange(user)
+        self.assertNotEquals(oldpass, newPass)
+        newUser = User.objects.get(id=user.id)
+        self.assertNotEquals(oldpass, newUser.password)
 
 
 class SendMailTest(TestCase):
