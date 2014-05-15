@@ -132,6 +132,10 @@ class UserHandlerTest(TestCase):
                 u"id": 1})
 
     def test_get_one_not_found(self):
+        factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
         ret = self.client.get('/access/user/2')
 
         self.assertEquals(ret.status_code, 404,
