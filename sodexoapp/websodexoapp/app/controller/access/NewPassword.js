@@ -50,10 +50,10 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
             method: 'PUT',
             scope: this,
             success: function(response, eOpts){
-                window.location = './access/login?report_msg='+responseText;
+                window.location = './access/login?report_msg='+response.responseText;
             },
             failure: function(response, opts) {
-               //TODO
+               email.markInvalid(response.responseText);
             },
         });
     }
