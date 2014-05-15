@@ -38,12 +38,25 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
             if(result.data.length===0) {
                 email.markInvalid('Email nao encontrado');
             }else {
-                this.defineNewPassword();
+                this.defineNewPassword(result.data.id);
             }
         }
     },
 
     defineNewPassword : function(userId){
-        console.log('funcao define');
+
+        debugger;
+        Ext.Ajax.request({
+            url : '/access/userauthentication/'+userId,
+            method: 'PUT',
+            scope: this,
+            success: function(response, eOpts){
+                result = Ext.JSON.decode(response.responseText).total;
+                if(result === 0)
+                    console.log('sucess');
+                else
+                    console.log('failed');
+            }
+        });
     }
 });
