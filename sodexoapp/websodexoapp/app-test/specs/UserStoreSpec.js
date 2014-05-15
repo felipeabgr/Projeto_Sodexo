@@ -1,8 +1,8 @@
 describe('Store User', function() {
 
     it('should exists',function() {
-        var userStore = Ext.create('Sodexoapp.store.Users');
-        expect(userStore.$className).toEqual('Sodexoapp.store.Users');
+        var userStore = Ext.create('Sodexoapp.store.access.Users');
+        expect(userStore.$className).toEqual('Sodexoapp.store.access.Users');
     });
 
     describe('Mocking Ajax', function() {
@@ -16,7 +16,7 @@ describe('Store User', function() {
         });
 
         it('should make an AJAX request to the correct URL', function() {
-            var store = Ext.create('Sodexoapp.store.Users');
+            var store = Ext.create('Sodexoapp.store.access.Users');
             store.load();
 
             expect(jasmine.Ajax.requests.mostRecent().url).toContain('/access/user');
@@ -28,7 +28,7 @@ describe('Store User', function() {
             var emailFn = jasmine.createSpy("sucess");
             var passwordFn = jasmine.createSpy("sucess");
 
-            var store = Ext.create('Sodexoapp.store.Users');
+            var store = Ext.create('Sodexoapp.store.access.Users');
 
             store.on('load', function(store){
                 var userFake = store.data.items[0].data;
@@ -63,7 +63,7 @@ describe('Store User', function() {
         it('makes a REST request to load more than one user', function() {
             var countFn = jasmine.createSpy("success");
 
-            var store = Ext.create('Sodexoapp.store.Users');
+            var store = Ext.create('Sodexoapp.store.access.Users');
 
             store.on('load', function(store){
                 countFn(store.data.length);

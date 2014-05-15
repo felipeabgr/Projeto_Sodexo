@@ -13,8 +13,9 @@ def show_system(request):
 def do_login(request):
     if request.method == 'GET':
         error_msg = request.GET.get('error_msg', '')
+        report_msg = request.GET.get('report_msg', '')
         return render_to_response('login.html',
-                            {'error_msg': error_msg})
+                            {'error_msg': error_msg, 'report_msg': report_msg})
 
     username = request.POST['username']
     password = request.POST['password']

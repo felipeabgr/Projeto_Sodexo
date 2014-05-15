@@ -1,12 +1,12 @@
 describe('Model User', function(){
 
     it('exists', function() {
-        var model = Ext.create('Sodexoapp.model.User', {});
-        expect(model.$className).toEqual('Sodexoapp.model.User');
+        var model = Ext.create('Sodexoapp.model.access.User', {});
+        expect(model.$className).toEqual('Sodexoapp.model.access.User');
     });
 
     it('has properties', function() {
-        var model = Ext.create('Sodexoapp.model.User', {
+        var model = Ext.create('Sodexoapp.model.access.User', {
             username:'defaultName',
             password:'123456',
             email:'defaultEmail@email.com'
@@ -17,7 +17,7 @@ describe('Model User', function(){
     });
 
     it('requires username', function() {
-        var model = Ext.create('Sodexoapp.model.User',{
+        var model = Ext.create('Sodexoapp.model.access.User',{
             password:'defaultName',
             email:'defaultEmail@email.com'
         });
@@ -26,7 +26,7 @@ describe('Model User', function(){
     });
 
     it('requires password', function() {
-        var model = Ext.create('Sodexoapp.model.User',{
+        var model = Ext.create('Sodexoapp.model.access.User',{
             username:'defaultName',
             email:'defaultEmail@email.com'
         });
@@ -35,7 +35,7 @@ describe('Model User', function(){
     });
 
     it('requires email', function() {
-        var model = Ext.create('Sodexoapp.model.User',{
+        var model = Ext.create('Sodexoapp.model.access.User',{
             username:'defaultName',
             password:'123456',
         });

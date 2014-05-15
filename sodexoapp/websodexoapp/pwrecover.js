@@ -4,14 +4,15 @@ Ext.application({
 
     appFolder: 'static/app',
 
+    controllers: [
+        'access.NewPassword'
+    ],
+
     launch: function() {
         Ext.create('Ext.container.Viewport', {
-            layout: 'fit',
             items: [
                 {
-                    xtype: 'panel',
-                    title: 'Sodexo',
-                    html : 'List of users will go here'
+                    xtype: 'newpassword',
                 }
             ]
         });

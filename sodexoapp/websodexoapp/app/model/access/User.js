@@ -1,4 +1,4 @@
-Ext.define('Sodexoapp.model.User',{
+Ext.define('Sodexoapp.model.access.User',{
     extend:'Ext.data.Model',
     fields: [
         {name:'id',type:'int'},
