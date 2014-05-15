@@ -1,7 +1,6 @@
 Ext.define('Sodexoapp.store.access.Users',{
     extend:'Ext.data.Store',
     model: 'Sodexoapp.model.access.User',
-
     filter: Ext.emptyFn,
     clearFilter: Ext.emptyFn,
     emailFilter: function (email) {
@@ -15,7 +14,7 @@ Ext.define('Sodexoapp.store.access.Users',{
 
         reader: {
             type: 'json',
-            root: 'users',
+            root: 'result',
             successProperty: 'success'
         }
     }
