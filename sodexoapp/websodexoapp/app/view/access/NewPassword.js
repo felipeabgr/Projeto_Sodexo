@@ -27,18 +27,19 @@ Ext.define('Sodexoapp.view.access.NewPassword', {
                 itemId:'emailField',
                 fieldLabel:'Email',
                 allowBlank:false,
+                blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 invalidText: 'Invalid Email',
                 vtype: 'email',
-                vtypeText: 'invalid email Format',
+                vtypeText: 'Formato invalido. Use o formato: "name@sample.com"',
                 listeners: {
                     afterrender: function(field) {
                         field.focus();
                     }
                 },
                 margin: '20 0 0 20',
-                width:450
-            }
+                width:450,
+            },
         ];
 
         this.callParent(arguments);
