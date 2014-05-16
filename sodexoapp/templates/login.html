@@ -16,19 +16,17 @@
                 <div class='reportmsg'>{{report_msg}}</div>
             {% endif %}
 
-            <div id='login-container'>
+            <div class='login-container'>
                 <div class='header'>Login
                 </div>
                 <br></br>
                 <form method="POST">
-
                     <label for='username'>{% trans 'Usuário' %}</label>
                     <input class='textfield' type="text" name="username" id='username'/>
                     <br />
                     <label for='password'>{% trans 'Senha' %}</label>
                     <input class='textfield' type="password" name="password" id="password" />
                     <br />
-                    
                         <div align="center">
                             <a href="/passwordrecover">Esqueci minha senha</a> 
                         </div>
