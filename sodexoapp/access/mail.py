@@ -8,8 +8,6 @@ def send_generic_mail(subject, message, to):
     for recipient in to:
         if recipient == '':
             raise ValueError('Recipiente address invalid')
-    try:
-        return send_mail(subject, message, settings.SENDMAIL_FROM_ADDRESS, to,
-                                                        fail_silently=False)
-    except SMTPException, e:
-        raise e
+
+    return send_mail(subject, message, settings.SENDMAIL_FROM_ADDRESS, to,
+                                                         fail_silently=False)

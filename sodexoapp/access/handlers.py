@@ -42,7 +42,7 @@ class UserAuthenticationHandler(BaseHandler):
                     ' e enviada por email'}
         except ObjectDoesNotExist:
                 return HttpResponse('Not found', status=404)
-        except SMTPException:
+        except Exception:
                 return HttpResponse('A new password was created but the '\
                 ' Emails server is unavailable now. Please try again later.',
-                status=503)
+                    status_code=500)
