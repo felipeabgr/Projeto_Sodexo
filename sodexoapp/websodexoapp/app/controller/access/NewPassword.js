@@ -33,24 +33,21 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
 
         if(email.isValid()) {
             var store = Ext.create('Sodexoapp.store.access.Users');
-
             store.on('load', function(store){
-                debugger;
                 if(store.getCount()===0) {
                     email.markInvalid('Email nao encontrado');
                 }else {
                     var user = store.data.items[0].data;
-                    defineNewPassword(user.id);
+                    this.defineNewPassword(user.id);
                 }
             },this);
 
-            store.emailFilter(email.getValue());
-            result = store.load();
+            store.filter('email',email.getValue());
+            store.load();
         }
     },
 
     defineNewPassword : function(userId){
-        debugger;
         Ext.Ajax.request({
             url : '/access/userauthentication/'+userId,
             method: 'PUT',

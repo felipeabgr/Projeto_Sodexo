@@ -5,7 +5,7 @@ Ext.define('Sodexoapp.view.access.NewPassword', {
     title: 'Password Recover',
     width: 500,
     height:150,
-    margin: '30 0 0 30',
+    margin: '30',
 
 
     bbar: [
