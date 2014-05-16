@@ -34,8 +34,8 @@ SENDMAIL_FROM_ADDRESS = 'no-reply@inatel.br'
 
 PASSWORD_RECOVER_EMAIL_SUBJECT = 'Sodexo new password'
 
-PASSWORD_RECOVER_EMAIL_MESSAGE = 'Para acessar o Sodexoapp utilize a nova senha' \
-                                 'gerada pelo sistema: '
+PASSWORD_RECOVER_EMAIL_MESSAGE = 'Para acessar o Sodexoapp utilize a nova ' \
+                                 'senha gerada pelo sistema: '
 # EMAIL_HOST = 'smtp.ispm.com.br'
 # EMAIL_PORT = 25
 # EMAIL_HOST_USER = 'marcel.portela@ispm.com.br'
