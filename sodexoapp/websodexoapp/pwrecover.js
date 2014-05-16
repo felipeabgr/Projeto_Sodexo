@@ -2,7 +2,7 @@ Ext.application({
     requires: ['Ext.container.Viewport'],
     name: 'Sodexoapp',
 
-    appFolder: 'static/app',
+    appFolder: '/static/app',
 
     controllers: [
         'access.NewPassword'
