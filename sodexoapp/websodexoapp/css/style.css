@@ -8,18 +8,15 @@ body {
 }
 
 .content {
-    margin: 0 auto;
+    margin: 10px auto;
     width: 512px;
 }
 
-#login-container {
+.login-container {
     display: block;
     padding-top: 0;
     padding-bottom: 0;
     border: 1px solid #99CCFF;
-    position:absolute;
-    left: 30px;
-    top: 28px;
 }
 
 label {

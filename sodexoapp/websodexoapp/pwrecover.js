@@ -10,9 +10,14 @@ Ext.application({
 
     launch: function() {
         Ext.create('Ext.container.Viewport', {
+            layout: {
+                type: 'vbox',
+                align: 'center'
+            },
             items: [
                 {
                     xtype: 'newpassword',
+                    layout: {align:'center'}
                 }
             ]
         });
