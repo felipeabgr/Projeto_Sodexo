@@ -45,7 +45,7 @@ describe('Store User', function() {
             mockedRequest.response({
                 status:       200,
                 responseText: "{success: 'true',"+
-                               "users: ["+
+                               "result: ["+
                                    "{"+
                                        "id: '1',"+
                                        "username: 'zoio',"+
@@ -76,7 +76,7 @@ describe('Store User', function() {
             mockedRequest.response({
                 status:       200,
                 responseText: "{success: 'true',"+
-                               "users: ["+
+                               "result: ["+
                                    "{"+
                                        "id: '1',"+
                                        "username: 'zoio',"+

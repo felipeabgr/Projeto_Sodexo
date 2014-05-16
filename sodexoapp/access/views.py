@@ -33,5 +33,6 @@ def do_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def recover_password(request):
     return render(request, 'pwrecover.html', content_type='text/html')
