@@ -56,7 +56,6 @@ Ext.define('Sodexoapp.controller.access.NewPassword', {
             method: 'PUT',
             scope: this,
             success: function(response, eOpts){
-                debugger;
                 var jsonResponse = Ext.JSON.decode(response.responseText);
                 window.location = './access/login?report_msg='+jsonResponse.result;
             },
