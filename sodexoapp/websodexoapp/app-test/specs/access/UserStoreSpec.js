@@ -3,6 +3,12 @@ describe('Store User', function() {
     it('should exists',function() {
         var userStore = Ext.create('Sodexoapp.store.access.Users');
         expect(userStore.$className).toEqual('Sodexoapp.store.access.Users');
+
+        var dt = new Date();
+        debugger;
+        //dt = Thu May 25 2006 (today&#39;s month/day in 2006)
+        dt = Ext.Date.parse("2006", "Y");
+
     });
 
     describe('Mocking Ajax', function() {
