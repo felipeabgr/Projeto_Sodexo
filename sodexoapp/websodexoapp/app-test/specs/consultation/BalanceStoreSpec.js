@@ -5,7 +5,7 @@ describe('Balance Store', function() {
         expect(userStore.$className).toEqual('Sodexoapp.store.consultation.Balances');
     });
 
-     describe('Mocking Ajax', function() {
+    describe('Mocking Ajax', function() {
 
         beforeEach(function() {
             jasmine.Ajax.install();
@@ -37,9 +37,9 @@ describe('Balance Store', function() {
                 idDm(balanceData.id);
                 dateDm(balanceData.date);
                 balanceDm(balanceData.balance);
-                dailyValeDm(balanceData.dailyVale);
+                dailyValeDm(balanceData.daily_value);
                 leftoverDm(balanceData.leftover);
-                remainingDaysDm(balanceData.remainingDays);
+                remainingDaysDm(balanceData.remaining_days);
             });
 
             store.load();
@@ -54,18 +54,40 @@ describe('Balance Store', function() {
                                        "id: '1',"+
                                        "date: '2014-5-15',"+
                                        "balance: '300.0',"+
-                                       "daily_value: '10'}"+
-                                       "leftover: '10.5'"+
-                                       "remaining_days: '2'"+
+                                       "daily_value: '10',"+
+                                       "leftover: '10.5',"+
+                                       "remaining_days: '2'}"+
                                 "]}"
             });
 
-            expect(idDm).toHaveBeenCalledWith(2);
-            expect(dateDm).toHaveBeenCalledWith('zoio');
-            expect(balanceDm).toHaveBeenCalledWith('leandroc@inatel.br');
-            expect(dailyValeDm).toHaveBeenCalledWith('svcfasasdasd');
-            expect(leftoverDm).toHaveBeenCalledWith('33');
-            expect(remainingDaysDm).toHaveBeenCalledWith('2');
+            expect(idDm).toHaveBeenCalledWith(1);
+            expect(dateDm).toHaveBeenCalledWith(new Date('2014/5/15'));
+            expect(balanceDm).toHaveBeenCalledWith(300.0);
+            expect(dailyValeDm).toHaveBeenCalledWith(10);
+            expect(leftoverDm).toHaveBeenCalledWith(10.5);
+            expect(remainingDaysDm).toHaveBeenCalledWith(2);
+        });
+
+        it('should return empty JSON when the response has the property success with false value', function() {
+            var dataLength = jasmine.createSpy("success");
+
+            var store = Ext.create('Sodexoapp.store.consultation.Balances');
+
+            store.on('load', function(store){
+                dataLength(store.data.length);
+            });
+
+            store.load();
+
+            var mockedRequest = jasmine.Ajax.requests.mostRecent();
+
+            mockedRequest.response({
+                status:       200,
+                responseText: "{success: 'false',"+
+                               "result: []}"
+            });
+
+            expect(dataLength).toHaveBeenCalledWith(0);
         });
     });
 });
