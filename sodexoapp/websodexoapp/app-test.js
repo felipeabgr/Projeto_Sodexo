@@ -8,5 +8,9 @@ Ext.application({
 
     appFolder: 'app',
 
+    controllers: [
+        'access.NewPassword'
+    ],
+
     autoCreateViewport: false
 });
