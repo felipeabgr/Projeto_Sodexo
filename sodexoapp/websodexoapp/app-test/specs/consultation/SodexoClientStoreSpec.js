@@ -15,27 +15,25 @@ describe('Store SodexoClient', function() {
             jasmine.Ajax.uninstall();
         });
 
-        it('should make an AJAX request to the correct URL', function() {
+        it('should make a request to the correct URL', function() {
             var store = Ext.create('Sodexoapp.store.consultation.SodexoClients');
             store.load();
 
             expect(jasmine.Ajax.requests.mostRecent().url).toContain('/consultation/sodexoclient');
         });
 
-        it('makes a REST request to test the response data', function() {
-            var idFn = jasmine.createSpy("success");
-            var usernameFn = jasmine.createSpy("success");
-            var emailFn = jasmine.createSpy("sucess");
-            var passwordFn = jasmine.createSpy("sucess");
+        it('should return the correct JSON into the response data', function() {
+            var idDm = jasmine.createSpy("success");
+            var cpfDm = jasmine.createSpy("success");
+            var sodexoCardDm = jasmine.createSpy("sucess");
 
-            var store = Ext.create('Sodexoapp.store.access.Users');
+            var store = Ext.create('Sodexoapp.store.consultation.SodexoClients');
 
             store.on('load', function(store){
-                var userFake = store.data.items[0].data;
-                idFn(userFake.id);
-                usernameFn(userFake.username);
-                emailFn(userFake.email);
-                passwordFn(userFake.password);
+                var sodexoclientFake = store.data.items[0].data;
+                idDm(sodexoclientFake.id);
+                cpfDm(sodexoclientFake.username);
+                sodexoCardDm(sodexoclientFake.email);
             });
 
             store.load();
@@ -48,16 +46,36 @@ describe('Store SodexoClient', function() {
                                "result: ["+
                                    "{"+
                                        "id: '1',"+
-                                       "username: 'zoio',"+
-                                       "email: 'leandroc@inatel.br',"+
-                                       "password: 'svcfasasdasd'}"+
+                                       "cpf: '04861516625',"+
+                                       "sodexo_card: '6598264110258',"+
                                 "]}"
             });
 
-            expect(idFn).toHaveBeenCalledWith(1);
-            expect(usernameFn).toHaveBeenCalledWith('zoio');
-            expect(emailFn).toHaveBeenCalledWith('leandroc@inatel.br');
-            expect(passwordFn).toHaveBeenCalledWith('svcfasasdasd');
+            expect(idDm).toHaveBeenCalledWith(1);
+            expect(cpfDm).toHaveBeenCalledWith('zoio');
+            expect(sodexoCardDm).toHaveBeenCalledWith('leandroc@inatel.br');
         });
+
+        /*it('should return empty JSON when the response has the property success with false value', function() {
+            var dataLength = jasmine.createSpy("success");
+
+            var store = Ext.create('Sodexoapp.store.consultation.Balances');
+
+            store.on('load', function(store){
+                dataLength(store.data.length);
+            });
+
+            store.load();
+
+            var mockedRequest = jasmine.Ajax.requests.mostRecent();
+
+            mockedRequest.response({
+                status:       200,
+                responseText: "{success: 'false',"+
+                               "result: []}"
+            });
+
+            expect(dataLength).toHaveBeenCalledWith(0);
+        });*/
     });
 });

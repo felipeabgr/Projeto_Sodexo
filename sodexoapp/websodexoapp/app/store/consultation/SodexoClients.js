@@ -3,6 +3,12 @@ Ext.define('Sodexoapp.store.consultation.SodexoClients',{
     //model: 'Sodexoapp.model.consultation.SodexoClients',
     proxy: {
         type: 'rest',
-        url: '/consultation/sodexoclient'
+        url: '/consultation/sodexoclient',
+
+        reader: {
+            type: 'json',
+            root: 'result',
+            successProperty: 'success'
+        }
     }
 });
