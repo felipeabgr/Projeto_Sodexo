@@ -44,6 +44,8 @@ PASSWORD_RECOVER_EMAIL_MESSAGE = 'Para acessar o Sodexoapp utilize a nova ' \
 
 # PLUGIN_SENDMAIL_FROM_ADDRESS = 'desenvolvimento@ispm.com.br'
 
+AUTH_PROFILE_MODULE = 'balance.UserBalance'
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -140,7 +142,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'access'
+    'access',
+    'userprofile',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
