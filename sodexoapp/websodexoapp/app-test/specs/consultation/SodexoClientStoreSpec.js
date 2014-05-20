@@ -30,6 +30,7 @@ describe('Store SodexoClient', function() {
             var store = Ext.create('Sodexoapp.store.consultation.SodexoClients');
 
             store.on('load', function(store){
+                debugger;
                 var sodexoclientFake = store.data.items[0].data;
                 idDm(sodexoclientFake.id);
                 cpfDm(sodexoclientFake.username);
