@@ -1,3 +1,4 @@
+var teste = null;
 Ext.application({
     requires: ['Ext.container.Viewport'],
     name: 'Sodexoapp',
@@ -9,7 +10,8 @@ Ext.application({
     ],
 
     launch: function() {
-        Ext.create('Ext.container.Viewport', {
+        teste = Ext.create('Sodexoapp.view.consultation.Balance');
+         Ext.create('Ext.container.Viewport', {
             layout: 'fit',
             items: [
             {
@@ -21,7 +23,7 @@ Ext.application({
                 {
 
                     xtype: 'panel',
-                    title: 'Menu',
+                    itemId: 'menuPanel',
                     columnWidth: 0.2,
                     header: false,
                     border: 0,
@@ -49,7 +51,7 @@ Ext.application({
                 },
                 {
                     xtype: 'container',
-                    title: 'Child Panel 2',
+                    itemId: 'contentPanel',
                     columnWidth: 0.8,
                     items: Ext.create('Sodexoapp.view.consultation.Balance')
                 }]

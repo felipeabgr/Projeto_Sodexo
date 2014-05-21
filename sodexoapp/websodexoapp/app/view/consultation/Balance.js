@@ -13,7 +13,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
             {
                 xtype: 'panel',
                 header: false,
-                title: 'Child Panel 1',
+                itemId: 'consultPanel',
                 border: 0,
                 layout: {
                     type: 'vbox',
@@ -31,7 +31,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                     {
                         xtype: 'panel',
                         header: false,
-                        title: 'box',
+                        itemId: 'captchaBox',
                         height: 80,
                         width: 200,
                         margin: "10 0 10 0"
@@ -54,7 +54,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
             {
                 xtype: 'panel',
                 header: false,
-                title: 'Child Panel 2',
+                itemId: 'infoPanel',
                 height: 100,
                 border: 0,
                 layout: {
@@ -65,42 +65,96 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                     {
                         xtype: 'panel',
                         header: false,
-                        title: 'box',
+                        itemId: 'infoBox',
                         height: 100,
                         width: 350,
                         border: '10 10 10 10',
-                        layout: {
-                            type: 'vbox',
-                            align: 'left'
-                        },
+                        hidden: true,
+                        layout: 'column',
                         items:[
                             {
-                                xtype: 'text',
-                                text: 'Data:',
-                                margin: "5"
+                                xtype: 'panel',
+                                header: false,
+                                itemId: 'infoBoxL',
+                                columnWidth: 0.5,
+                                border: 0,
+                                layout: {
+                                    type: 'vbox',
+                                    align: 'left'
+                                },
+                                items:[
+                                    {
+                                        xtype: 'text',
+                                        text: 'Data:',
+                                        margin: "5"
+                                    },
+                                    {
+                                        xtype: 'text',
+                                        text: 'Saldo:',
+                                        margin: "5"
+                                    },
+                                    {
+                                        xtype: 'text',
+                                        text: 'Valor Diário:',
+                                        margin: "5"
+                                    },
+                                    {
+                                        xtype: 'text',
+                                        text: 'Dias Restantes:',
+                                        margin: "5"
+                                    },
+                                    {
+                                        xtype: 'text',
+                                        text: 'Resto:',
+                                        margin: "5"
+                                    },
+                                ]
                             },
                             {
-                                xtype: 'text',
-                                text: 'Saldo:',
-                                margin: "5"
-                            },
-                            {
-                                xtype: 'text',
-                                text: 'Valor Diário:',
-                                margin: "5"
-                            },
-                            {
-                                xtype: 'text',
-                                text: 'Dias Restantes:',
-                                margin: "5"
-                            },
-                            {
-                                xtype: 'text',
-                                text: 'Resto:',
-                                margin: "5"
-                            },
+                                xtype: 'panel',
+                                header: false,
+                                itemId: 'infoBoxR',
+                                columnWidth: 0.5,
+                                border: 0,
+                                layout: {
+                                    type: 'vbox',
+                                    align: 'right'
+                                },
+                                items:[
+                                    {
+                                        itemId: 'dataValText',
+                                        xtype: 'text',
+                                        text: '',
+                                        margin: "5"
+                                    },
+                                    {
+                                        itemId: 'saldoValText',
+                                        xtype: 'text',
+                                        text: '',
+                                        margin: "5"
+                                    },
+                                    {
+                                        itemId: 'valorDiarioValText',
+                                        xtype: 'text',
+                                        text: '-',
+                                        margin: "5"
+                                    },
+                                    {
+                                        itemId: 'diasRestantesValText',
+                                        xtype: 'text',
+                                        text: '',
+                                        margin: "5"
+                                    },
+                                    {
+                                        itemId: 'restoValText',
+                                        xtype: 'text',
+                                        text: '',
+                                        margin: "5"
+                                    },
+                                ]
+                            }
                         ]
-                    }
+                    },
                 ]
             }
         ];
