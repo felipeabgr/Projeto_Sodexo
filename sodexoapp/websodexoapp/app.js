@@ -1,4 +1,3 @@
-var teste = null;
 Ext.application({
     requires: ['Ext.container.Viewport'],
     name: 'Sodexoapp',
@@ -10,7 +9,6 @@ Ext.application({
     ],
 
     launch: function() {
-        teste = Ext.create('Sodexoapp.view.consultation.Balance');
          Ext.create('Ext.container.Viewport', {
             layout: 'fit',
             items: [
