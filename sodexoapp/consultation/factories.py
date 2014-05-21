@@ -1,0 +1,20 @@
+from consultation.models import SodexoClient
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+import factory
+
+
+class SodexoClientFactory(factory.DjangoModelFactory):
+    FACTORY_FOR = SodexoClient
+    user = factory.Sequence(lambda x: 'sodexo_user%d' % x)
+    name = factory.Sequence(lambda x: '%duser' % x)
+    cpf = factory.Sequence(lambda x: '123.123.123-2%d' % x)
+    cardNumber = factory.Sequence(lambda x: '%d23456789' % x)
+    dailyValue = factory.Sequence(lambda x: '%f' % x)
+
+class UserFactory(factory.DjangoModelFactory):
+    FACTORY_FOR = User
+    username = factory.Sequence(lambda x: 'sodexo_user%d' % x)
+    email = factory.Sequence(lambda x: '%duser@sodexoapp.com' % x)
+    password = 'abc'
