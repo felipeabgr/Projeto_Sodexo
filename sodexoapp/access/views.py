@@ -7,7 +7,10 @@ from django.shortcuts import render_to_response, render
 
 @login_required
 def show_system(request):
-    return render_to_response('index.html')
+    user = {'id': request.user.id,
+            'username': request.user.username,
+            'email': request.user.email}
+    return render_to_response('index.html', {'user': user})
 
 
 def do_login(request):
