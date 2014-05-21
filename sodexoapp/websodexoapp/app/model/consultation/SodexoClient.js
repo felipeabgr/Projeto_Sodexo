@@ -3,6 +3,8 @@ Ext.define('Sodexoapp.model.consultation.SodexoClient',{
     fields: [
         {name:'id',type:'int'},
         {name:'cpf',type:'string'},
-        {name:'sodexo_card',type:'string'},
+        {name:'card_number',type:'string'},
+        {name: 'daily_value', type:'float'},
+        {name: 'user_id', type: 'int'},
     ],
 });
