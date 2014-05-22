@@ -1,0 +1,11 @@
+######################
+# SODEXOCLIENT 
+######################
+-   model: consultation.SodexoClient
+    pk: 1
+    fields:
+        name: 'Tiago'
+        cpf: '24263676360'
+        cardNumber: '55688445668988'
+        dailyValue: 18.5
+        user: 1
