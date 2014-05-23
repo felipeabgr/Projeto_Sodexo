@@ -29,19 +29,28 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         }
                     },
                     {
-                        xtype: 'panel',
+                        xtype: 'component',
                         header: false,
                         itemId: 'captchaBox',
                         height: 80,
                         width: 200,
-                        margin: "10 0 10 0"
+                        margin: "10 0 10 0",
+                        autoEl: {
+                            tag: 'img',
+                            src: '/consultation/getCaptcha'
+                        }
                     },
                     {
                         xtype: 'textfield',
                         itemId:'captchaField',
                         fieldLabel:'Captcha',
                         labelWidth: 50,
-                        margin: "5 0 5 0"
+                        margin: "5 0 5 0",
+                        listeners: {
+                            afterrender: function(field) {
+                                field.focus();
+                            }
+                        },
                     },
                     {
                         xtype: 'button',
