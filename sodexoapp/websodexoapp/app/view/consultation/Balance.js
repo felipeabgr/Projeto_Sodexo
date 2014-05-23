@@ -37,7 +37,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         margin: "10 0 10 0",
                         autoEl: {
                             tag: 'img',
-                            src: 'https://sodexosaldocartao.com.br/saldocartao/jcaptcha.do'
+                            src: '/consultation/getCaptcha'
                         }
                     },
                     {
@@ -45,7 +45,12 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         itemId:'captchaField',
                         fieldLabel:'Captcha',
                         labelWidth: 50,
-                        margin: "5 0 5 0"
+                        margin: "5 0 5 0",
+                        listeners: {
+                            afterrender: function(field) {
+                                field.focus();
+                            }
+                        },
                     },
                     {
                         xtype: 'button',
