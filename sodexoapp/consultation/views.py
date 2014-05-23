@@ -1,14 +1,15 @@
 # encoding: utf-8
-from django.http import HttpResponse, \
-                        HttpResponseBadRequest, \
-                        HttpResponseNotAllowed
-
-from consultation.models import SodexoClient
 from bs4 import BeautifulSoup
 import requests
 import json
 import time
 from decimal import *
+
+from django.http import HttpResponse, \
+                        HttpResponseBadRequest, \
+                        HttpResponseNotAllowed
+
+from consultation.models import SodexoClient
 
 
 CAPTCHA_URL = 'https://sodexosaldocartao.com.br/saldocartao/jcaptcha.do'
