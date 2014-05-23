@@ -64,7 +64,6 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                 xtype: 'panel',
                 header: false,
                 itemId: 'infoPanel',
-                height: 100,
                 border: 0,
                 layout: {
                     type: 'vbox',
@@ -75,7 +74,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         xtype: 'panel',
                         header: false,
                         itemId: 'infoBox',
-                        height: 100,
+                        // height: 150,
                         width: 350,
                         border: '10 10 10 10',
                         hidden: true,
