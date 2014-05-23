@@ -12,7 +12,8 @@ from decimal import *
 
 
 CAPTCHA_URL = 'https://sodexosaldocartao.com.br/saldocartao/jcaptcha.do'
-POST_URL = 'https://sodexosaldocartao.com.br/saldocartao/consultaSaldo.do?operation=consult'
+POST_URL = 'https://sodexosaldocartao.com.br/saldocartao/'\
+                                        'consultaSaldo.do?operation=consult'
 
 
 def getCaptcha(request):
@@ -50,8 +51,10 @@ def calculate_balance(request):
         return sodexo_result
 
     balance_result = perform_calculation(sodexo_client, sodexo_result)
-    response = HttpResponse(json.dumps(balance_result), content_type="text/html")
+    response = HttpResponse(json.dumps(balance_result),
+                                                content_type="text/html")
     return response
+
 
 def get_sodexo_balance(sodexo_client, captcha_text, sodexo_session_id):
     post_data = {
@@ -68,17 +71,18 @@ def get_sodexo_balance(sodexo_client, captcha_text, sodexo_session_id):
     resp = requests.post(POST_URL, params=post_data, cookies=cookie)
 
     soup = BeautifulSoup(resp.content)
-    error_message = soup.find("span", {"class" : "textRed"})
+    error_message = soup.find("span", {"class": "textRed"})
 
     if not error_message:
         clientBalance = 0
 
         for link in soup.find_all(id='balance'):
             balance = link.find('var')
-            clientBalance = Decimal(balance.string.split( )[2])
+            clientBalance = Decimal(balance.string.split()[2])
         return clientBalance
     else:
         return HttpResponseBadRequest(error_message.get_text())
+
 
 def perform_calculation(sodexo_client, balance):
     remaining_days = 0

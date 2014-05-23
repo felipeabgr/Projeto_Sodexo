@@ -76,22 +76,3 @@ class SodexoClientHandlerTest(TestCase):
         content = json.loads(ret.content)
         self.assertEquals(content.get('total'), 0)
         self.assertEquals(content.get('result'), [])
-
-
-class BalanceHandlerTest(TestCase):
-    fixtures = ['basic_auth.yaml','basic_sodexo_clients.yaml']
-
-    def test_post(self):
-        c = Client()
-        c.login(username='admin', password='admin')
-
-        data = {
-            'captcha_text': 'XHIJH',
-            'user_id': 1
-        }
-
-        ret = c.post('/consultation/balance', data)
-
-        self.assertEquals(ret.status_code, 200,
-            'Status_code incorreto(%d)\n'
-            'Content: \n%s' % (ret.status_code, ret.content))
