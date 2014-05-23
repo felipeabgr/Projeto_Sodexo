@@ -57,6 +57,11 @@ def calculate_balance(request):
     r = requests.post(POST_URL, params=post_data, cookies=cookie)
 
     soup = BeautifulSoup(r.content)
+    print soup
+    print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    errormsg = soup.find("span", {"class" : "textRed"})
+    print errormsg.find('var')
+
     clientBalance = None
 
     for link in soup.find_all(id='balance'):

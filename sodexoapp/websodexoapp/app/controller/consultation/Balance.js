@@ -55,7 +55,6 @@ Ext.define('Sodexoapp.controller.consultation.Balance', {
         var diasRestantesValText = this.getDiasRestantesValText();
         var restoValText = this.getRestoValText();
 
-
         dataValText.setText(balance.date);
         saldoValText.setText(balance.balance);
         valorDiarioValText.setText(balance.daily_value);
