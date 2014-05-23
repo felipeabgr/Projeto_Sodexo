@@ -14,3 +14,10 @@ class SodexoClientHandler(BaseHandler):
                 total=SodexoClient.objects.count())
         except ObjectDoesNotExist:
             return {"error 404": "not found"}
+
+
+class BalanceHandler(BaseHandler):
+    allow_methods = ('POST',)
+    model = SodexoClient
+    fields = ('captchaText','id')
+
