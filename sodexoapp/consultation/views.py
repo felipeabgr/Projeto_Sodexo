@@ -73,7 +73,7 @@ def calculate_balance(request):
         leftover = clientBalance
 
     balance_result = {
-        "data": time.strftime("%d/%m/%Y"),
+        "date": time.strftime("%d/%m/%Y"),
         "balance": str(clientBalance),
         "daily_value": str(sodexo_client.dailyValue),
         "remaining_days": str(remaining_days),
