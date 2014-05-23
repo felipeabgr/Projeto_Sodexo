@@ -40,8 +40,7 @@ Ext.define('Sodexoapp.controller.consultation.Balance', {
                 this.setTexts(jsonResponse);
             },
             failure: function(response){
-                var teste = response;
-                console.log(responseText);
+                console.log(response.responseText);
             }
         });
     },

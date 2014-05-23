@@ -95,4 +95,3 @@ class BalanceHandlerTest(TestCase):
         self.assertEquals(ret.status_code, 200,
             'Status_code incorreto(%d)\n'
             'Content: \n%s' % (ret.status_code, ret.content))
-        #id = json.loads(ret.content)['result']['id']

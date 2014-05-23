@@ -42,7 +42,18 @@ def calculate_balance(request):
             ("Erro: Os parâmetros enviados estão incorretos"))
 
     sodexo_client = SodexoClient.objects.get(user=user_id)
+    session_id = request.session['JSESSIONID']
 
+    sodexo_result = get_sodexo_balance(sodexo_client, captcha_text, session_id)
+
+    if isinstance(sodexo_result, HttpResponseBadRequest):
+        return sodexo_result
+
+    balance_result = perform_calculation(sodexo_client, sodexo_result)
+    response = HttpResponse(json.dumps(balance_result), content_type="text/html")
+    return response
+
+def get_sodexo_balance(sodexo_client, captcha_text, sodexo_session_id):
     post_data = {
                 'service': '5;1;6',
                 'cardNumber': sodexo_client.cardNumber,
@@ -52,39 +63,38 @@ def calculate_balance(request):
                 'y': '9',
             }
 
-    cookie = {'JSESSIONID': request.session['JSESSIONID']}
+    cookie = {'JSESSIONID': sodexo_session_id}
 
-    r = requests.post(POST_URL, params=post_data, cookies=cookie)
+    resp = requests.post(POST_URL, params=post_data, cookies=cookie)
 
-    soup = BeautifulSoup(r.content)
-    print soup
-    print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-    errormsg = soup.find("span", {"class" : "textRed"})
-    print errormsg.find('var')
+    soup = BeautifulSoup(resp.content)
+    error_message = soup.find("span", {"class" : "textRed"})
 
-    clientBalance = None
+    if not error_message:
+        clientBalance = 0
 
-    for link in soup.find_all(id='balance'):
-        balance = link.find('var')
-        clientBalance = Decimal(balance.string.split( )[2])
+        for link in soup.find_all(id='balance'):
+            balance = link.find('var')
+            clientBalance = Decimal(balance.string.split( )[2])
+        return clientBalance
+    else:
+        return HttpResponseBadRequest(error_message.get_text())
 
+def perform_calculation(sodexo_client, balance):
     remaining_days = 0
     leftover = 0
 
-    if clientBalance > sodexo_client.dailyValue:
-        remaining_days = int(clientBalance / sodexo_client.daily_value)
-        leftover = clientBalance % sodexo_client.daily_value
+    if balance > sodexo_client.dailyValue:
+        remaining_days = int(balance / sodexo_client.daily_value)
+        leftover = balance % sodexo_client.daily_value
     else:
-        leftover = clientBalance
+        leftover = balance
 
     balance_result = {
         "date": time.strftime("%d/%m/%Y"),
-        "balance": str(clientBalance),
+        "balance": str(balance),
         "daily_value": str(sodexo_client.dailyValue),
         "remaining_days": str(remaining_days),
         "leftover": str(leftover)
     }
-
-    response = HttpResponse(json.dumps(balance_result), content_type="text/html")
-
-    return response
+    return balance_result
