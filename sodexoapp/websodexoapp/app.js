@@ -5,7 +5,8 @@ Ext.application({
     appFolder: 'static/app',
 
     controllers:[
-         'consultation.Balance'
+         'consultation.Balance',
+         'consultation.Profile'
     ],
 
     launch: function() {
@@ -51,7 +52,8 @@ Ext.application({
                     xtype: 'container',
                     itemId: 'contentPanel',
                     columnWidth: 0.8,
-                    items: Ext.create('Sodexoapp.view.consultation.Balance')
+                    //items: Ext.create('Sodexoapp.view.consultation.Balance')
+                    items: Ext.create('Sodexoapp.view.consultation.Profile')
                 }]
             }]
         });
