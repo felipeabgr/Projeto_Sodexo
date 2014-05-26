@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 class SodexoClientHandler(BaseHandler):
     allow_methods = ('GET',)
     model = SodexoClient
-    fields = ('user', 'name', 'cpf', 'cardNumber', 'dailyValue')
+    fields = ('user', 'name', 'cpf', 'card_number', 'daily_value')
 
     def read(self, request, id=None, start_id=None):
         try:

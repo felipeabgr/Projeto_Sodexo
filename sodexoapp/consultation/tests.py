@@ -7,7 +7,7 @@ from django.test.client import Client
 
 from consultation.models import SodexoClient
 from consultation import factories
-
+from consultation import views
 
 class SodexoClientTetsCase(TestCase):
     def test_fields(self):
@@ -16,8 +16,8 @@ class SodexoClientTetsCase(TestCase):
         self.assertIsInstance(meta.get_field('user'), related.ForeignKey)
         self.assertIsInstance(meta.get_field('name'), CharField)
         self.assertIsInstance(meta.get_field('cpf'), CharField)
-        self.assertIsInstance(meta.get_field('cardNumber'), CharField)
-        self.assertIsInstance(meta.get_field('dailyValue'), DecimalField)
+        self.assertIsInstance(meta.get_field('card_number'), CharField)
+        self.assertIsInstance(meta.get_field('daily_value'), DecimalField)
 
     def test_unicode(self):
         c = SodexoClient(name='name_test')
@@ -45,8 +45,8 @@ class SodexoClientHandlerTest(TestCase):
             user=user,
             name='user',
             cpf='12345678912',
-            cardNumber='123456789',
-            dailyValue=30.00)
+            card_number='123456789',
+            daily_value=30.00)
 
         ret = self.client.get('/consultation/sodexoclient')
 
@@ -63,8 +63,8 @@ class SodexoClientHandlerTest(TestCase):
                           'usertest@sodexoapp.com')
         self.assertEquals(sodexoclient.get('name'), 'user')
         self.assertEquals(sodexoclient.get('cpf'), '12345678912')
-        self.assertEquals(sodexoclient.get('cardNumber'), '123456789')
-        self.assertEquals(sodexoclient.get('dailyValue'), '30')
+        self.assertEquals(sodexoclient.get('card_number'), '123456789')
+        self.assertEquals(sodexoclient.get('daily_value'), '30')
 
     def test_get_list_empty(self):
         ret = self.client.get('/consultation/sodexoclient')
@@ -76,3 +76,56 @@ class SodexoClientHandlerTest(TestCase):
         content = json.loads(ret.content)
         self.assertEquals(content.get('total'), 0)
         self.assertEquals(content.get('result'), [])
+
+
+class PerformCalculationViewsTest(TestCase):
+
+    def test_balance_greater_than_daily_value(self):
+        user = factories.UserFactory.create()
+        sodexo_client = factories.SodexoClientFactory.create(
+            user=user,
+            daily_value= 18.0)
+        result = views.perform_calculation(sodexo_client, 300)
+
+        self.assertEquals(result['remaining_days'], '16')
+        self.assertEquals(result['leftover'], '12.0')
+
+    def test_balance_minor_than_daily_value(self):
+        user = factories.UserFactory.create()
+        sodexo_client = factories.SodexoClientFactory.create(
+            user=user,
+            daily_value= 18.0)
+        result = views.perform_calculation(sodexo_client, 10.0)
+
+        self.assertEquals(result['remaining_days'], '0')
+        self.assertEquals(result['leftover'], '10.0')
+
+    def test_without_leftover(self):
+        user = factories.UserFactory.create()
+        sodexo_client = factories.SodexoClientFactory.create(
+            user=user,
+            daily_value= 18.0)
+        result = views.perform_calculation(sodexo_client, 90.0)
+
+        self.assertEquals(result['remaining_days'], '5')
+        self.assertEquals(result['leftover'], '0.0')
+
+    def test_balance_decimal(self):
+        user = factories.UserFactory.create()
+        sodexo_client = factories.SodexoClientFactory.create(
+            user=user,
+            daily_value= 18.0)
+        result = views.perform_calculation(sodexo_client, 0.47)
+
+        self.assertEquals(result['remaining_days'], '0')
+        self.assertEquals(result['leftover'], '0.47')
+
+    def test_balance_same_daily_value(self):
+        user = factories.UserFactory.create()
+        sodexo_client = factories.SodexoClientFactory.create(
+            user=user,
+            daily_value= 18.0)
+        result = views.perform_calculation(sodexo_client, 18.0)
+
+        self.assertEquals(result['remaining_days'], '1')
+        self.assertEquals(result['leftover'], '0.0')

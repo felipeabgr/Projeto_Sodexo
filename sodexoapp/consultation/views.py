@@ -60,7 +60,7 @@ def calculate_balance(request):
 def get_sodexo_balance(sodexo_client, captcha_text, sodexo_session_id):
     post_data = {
                 'service': '5;1;6',
-                'cardNumber': sodexo_client.cardNumber,
+                'cardNumber': sodexo_client.card_number,
                 'cpf': sodexo_client.cpf,
                 'jcaptcha_response': captcha_text,
                 'x': '6',
@@ -89,7 +89,7 @@ def perform_calculation(sodexo_client, balance):
     remaining_days = 0
     leftover = 0
 
-    if balance > sodexo_client.dailyValue:
+    if balance >= sodexo_client.daily_value:
         remaining_days = int(balance / sodexo_client.daily_value)
         leftover = balance % sodexo_client.daily_value
     else:
@@ -98,7 +98,7 @@ def perform_calculation(sodexo_client, balance):
     balance_result = {
         "date": time.strftime("%d/%m/%Y"),
         "balance": str(balance),
-        "daily_value": str(sodexo_client.dailyValue),
+        "daily_value": str(sodexo_client.daily_value),
         "remaining_days": str(remaining_days),
         "leftover": str(leftover)
     }
