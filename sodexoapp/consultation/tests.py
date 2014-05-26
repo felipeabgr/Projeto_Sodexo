@@ -9,6 +9,7 @@ from consultation.models import SodexoClient
 from consultation import factories
 from consultation import views
 
+
 class SodexoClientTetsCase(TestCase):
     def test_fields(self):
         meta = SodexoClient._meta
@@ -84,7 +85,7 @@ class PerformCalculationViewsTest(TestCase):
         user = factories.UserFactory.create()
         sodexo_client = factories.SodexoClientFactory.create(
             user=user,
-            daily_value= 18.0)
+            daily_value=18.0)
         result = views.perform_calculation(sodexo_client, 300)
 
         self.assertEquals(result['remaining_days'], '16')
@@ -94,7 +95,7 @@ class PerformCalculationViewsTest(TestCase):
         user = factories.UserFactory.create()
         sodexo_client = factories.SodexoClientFactory.create(
             user=user,
-            daily_value= 18.0)
+            daily_value=18.0)
         result = views.perform_calculation(sodexo_client, 10.0)
 
         self.assertEquals(result['remaining_days'], '0')
@@ -104,7 +105,7 @@ class PerformCalculationViewsTest(TestCase):
         user = factories.UserFactory.create()
         sodexo_client = factories.SodexoClientFactory.create(
             user=user,
-            daily_value= 18.0)
+            daily_value=18.0)
         result = views.perform_calculation(sodexo_client, 90.0)
 
         self.assertEquals(result['remaining_days'], '5')
@@ -114,7 +115,7 @@ class PerformCalculationViewsTest(TestCase):
         user = factories.UserFactory.create()
         sodexo_client = factories.SodexoClientFactory.create(
             user=user,
-            daily_value= 18.0)
+            daily_value=18.0)
         result = views.perform_calculation(sodexo_client, 0.47)
 
         self.assertEquals(result['remaining_days'], '0')
@@ -124,7 +125,7 @@ class PerformCalculationViewsTest(TestCase):
         user = factories.UserFactory.create()
         sodexo_client = factories.SodexoClientFactory.create(
             user=user,
-            daily_value= 18.0)
+            daily_value=18.0)
         result = views.perform_calculation(sodexo_client, 18.0)
 
         self.assertEquals(result['remaining_days'], '1')
