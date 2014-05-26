@@ -36,8 +36,15 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         width: 200,
                         margin: "10 0 10 0",
                         autoEl: {
-                            tag: 'img',
-                            src: '/consultation/getCaptcha'
+                            tag:'div', children:[
+                                {
+                                    tag:'img',
+                                    src:'/consultation/getCaptcha',
+                                    width: '95%',
+                                    name:'image',
+                                    id:'captchaImage'
+                                }
+                            ]
                         }
                     },
                     {
@@ -46,6 +53,9 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         fieldLabel:'Captcha',
                         labelWidth: 50,
                         margin: "5 0 5 0",
+                        allowBlank:false,
+                        blankText: 'Campo Obrigatorio',
+                        msgTarget: 'under',
                         listeners: {
                             afterrender: function(field) {
                                 field.focus();
@@ -74,7 +84,6 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         xtype: 'panel',
                         header: false,
                         itemId: 'infoBox',
-                        // height: 150,
                         width: 350,
                         border: '10 10 10 10',
                         hidden: true,
