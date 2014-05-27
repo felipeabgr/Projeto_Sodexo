@@ -29,12 +29,14 @@ class SodexoClientHandler(BaseHandler):
         print created
         return HttpResponse(200)'''
 
-    '''def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         if not self.has_model():
             print "not has model ................................"
             return HttpResponse(400)
-
+        print request.data
+        print type(request.data['user'])
+        print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         attrs = self.flatten_dict(request.data)
         print attrs
         try:
@@ -47,4 +49,4 @@ class SodexoClientHandler(BaseHandler):
             inst.save()
             return inst
         except self.model.MultipleObjectsReturned:
-            return HttpResponse(400)'''
+            return HttpResponse(400)

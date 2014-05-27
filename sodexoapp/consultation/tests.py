@@ -94,7 +94,8 @@ class SodexoClientHandlerTest(TestCase):
         c.login(username='admin', password='admin')
 
 
-        ret = c.post('/consultation/sodexoclient', data)
+        ret = c.post('/consultation/sodexoclient', json.dumps(data),\
+                                content_type='application/json')
         self.assertEquals(ret.status_code, 200,
             'Status_code incorreto(%d)\n'
             'Content: \n%s' % (ret.status_code, ret.content))
