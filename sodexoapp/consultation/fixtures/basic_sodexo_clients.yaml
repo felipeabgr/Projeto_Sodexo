@@ -11,7 +11,7 @@
         user: 1
 
 -   model: consultation.SodexoClient
-    pk: 1
+    pk: 2
     fields:
         name: 'Ricardo França'
         cpf: '13276645777'
