@@ -5,7 +5,7 @@ from django.db import models
 
 class SodexoClient(models.Model):
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
     name = models.CharField(max_length=50)
     cpf = models.CharField(max_length=11)
     cardNumber = models.CharField(max_length=15)

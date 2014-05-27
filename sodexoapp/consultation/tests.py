@@ -76,3 +76,28 @@ class SodexoClientHandlerTest(TestCase):
         content = json.loads(ret.content)
         self.assertEquals(content.get('total'), 0)
         self.assertEquals(content.get('result'), [])
+
+    def test_post(self):
+        data = {
+            'name': 'leandro',
+            'cpf': '25694845525',
+            'cardNumber': '12169564',
+            'dailyValue': 15.0,
+            'user': {
+                'username': 'tiago',
+                'email': 'tiago@inatel.br',
+                'password': 'grs6955'
+                }
+        }
+
+        c = Client()
+        c.login(username='admin', password='admin')
+
+
+        ret = c.post('/consultation/sodexoclient', data)
+        self.assertEquals(ret.status_code, 200,
+            'Status_code incorreto(%d)\n'
+            'Content: \n%s' % (ret.status_code, ret.content))
+
+        #id = json.loads(ret.content)['result']['id']
+
