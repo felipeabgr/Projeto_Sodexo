@@ -54,7 +54,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                         labelWidth: 50,
                         margin: "5 0 5 0",
                         allowBlank:false,
-                        blankText: 'Campo Obrigatorio',
+                        blankText: 'Campo Obrigatório',
                         msgTarget: 'under',
                         listeners: {
                             afterrender: function(field) {

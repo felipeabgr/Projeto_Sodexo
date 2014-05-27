@@ -27,27 +27,30 @@ Ext.define('Sodexoapp.controller.consultation.Balance', {
     },
 
     buildPost: function(button){
-        var captchText = this.getCaptchField().getValue();
-        var user = Sodexoapp.Session.logged_user;
-        Ext.Ajax.request({
-            url: '/consultation/balance',
-            method: 'POST',
-            scope: this,
-            jsonData: {
-                "user_id" : user.id,
-                "captcha_text" : captchText,
-            },
-            success: function(response){
-                var jsonResponse = Ext.JSON.decode(response.responseText);
-                this.setTexts(jsonResponse);
-                Ext.get('captchaImage').dom.src = "/consultation/getCaptcha";
-            },
-            failure: function(response){
-                Ext.get('captchaImage').dom.src = "/consultation/getCaptcha";
-                this.getCaptchField().markInvalid(response.responseText);
-                this.getInfoBox().setVisible(false);
-            }
-        });
+        if(this.getCaptchField().isValid()){
+            var captchText = this.getCaptchField().getValue();
+            var user = Sodexoapp.Session.logged_user;
+            Ext.Ajax.request({
+                url: '/consultation/balance',
+                method: 'POST',
+                scope: this,
+                jsonData: {
+                    "user_id" : user.id,
+                    "captcha_text" : captchText,
+                },
+                success: function(response){
+                    var jsonResponse = Ext.JSON.decode(response.responseText);
+                    this.setTexts(jsonResponse);
+                    Ext.get('captchaImage').dom.src = "/consultation/getCaptcha";
+                    this.getCaptchField().reset();
+                },
+                failure: function(response){
+                    Ext.get('captchaImage').dom.src = "/consultation/getCaptcha";
+                    this.getCaptchField().markInvalid(response.responseText);
+                    this.getInfoBox().setVisible(false);
+                }
+            });
+        }
     },
 
     setTexts: function(balance){
