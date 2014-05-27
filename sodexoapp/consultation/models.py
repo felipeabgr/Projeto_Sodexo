@@ -8,8 +8,8 @@ class SodexoClient(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=50)
     cpf = models.CharField(max_length=11)
-    cardNumber = models.CharField(max_length=15)
-    dailyValue = models.DecimalField(max_digits=4, decimal_places=2,
+    card_number = models.CharField(max_length=15)
+    daily_value = models.DecimalField(max_digits=4, decimal_places=2,
                                                                 default=00.00)
 
     def __unicode__(self):

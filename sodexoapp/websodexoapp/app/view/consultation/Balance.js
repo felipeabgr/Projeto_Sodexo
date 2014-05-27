@@ -40,7 +40,7 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                                 {
                                     tag:'img',
                                     src:'/consultation/getCaptcha',
-                                    width: '95%',
+                                    width: '100%',
                                     name:'image',
                                     id:'captchaImage'
                                 }
@@ -175,7 +175,6 @@ Ext.define('Sodexoapp.view.consultation.Balance', {
                 ]
             }
         ];
-
         this.callParent(arguments);
     }
 

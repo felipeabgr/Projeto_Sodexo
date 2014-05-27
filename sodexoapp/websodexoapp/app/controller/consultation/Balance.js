@@ -8,6 +8,7 @@ Ext.define('Sodexoapp.controller.consultation.Balance', {
     refs: [
         {ref: 'balanceView', selector: 'balaceConsult'},
         {ref: 'captchField', selector: 'balaceConsult #captchaField'},
+        {ref: 'sendCaptcha', selector: 'balaceConsult #sendCaptcha'},
         {ref: 'infoBox', selector: 'balaceConsult #infoBox'},
         {ref: 'dataValText', selector: 'balaceConsult #dataValText'},
         {ref: 'saldoValText', selector: 'balaceConsult #saldoValText'},
@@ -34,15 +35,17 @@ Ext.define('Sodexoapp.controller.consultation.Balance', {
             scope: this,
             jsonData: {
                 "user_id" : user.id,
-                "captch_text" : captchText,
+                "captcha_text" : captchText,
             },
             success: function(response){
                 var jsonResponse = Ext.JSON.decode(response.responseText);
                 this.setTexts(jsonResponse);
+                Ext.get('captchaImage').dom.src = "/consultation/getCaptcha";
             },
             failure: function(response){
                 Ext.get('captchaImage').dom.src = "/consultation/getCaptcha";
                 this.getCaptchField().markInvalid(response.responseText);
+                this.getInfoBox().setVisible(false);
             }
         });
     },
@@ -55,7 +58,6 @@ Ext.define('Sodexoapp.controller.consultation.Balance', {
         var valorDiarioValText = this.getValorDiarioValText();
         var diasRestantesValText = this.getDiasRestantesValText();
         var restoValText = this.getRestoValText();
-
 
         dataValText.setText(balance.date);
         saldoValText.setText(balance.balance);

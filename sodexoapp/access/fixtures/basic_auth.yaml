@@ -21,14 +21,14 @@
     pk: 2
     fields:
         date_joined: '2014-05-05 12:40:21'
-        email: 'leandroc@inatel.br'
-        first_name: "leandro"
+        email: 'ricarod@ispm.com.br'
+        first_name: "ricardo"
         groups: []
         is_active: true
         is_staff: true
         is_superuser: true
         last_login: '2014-05-05 12:40:34'
-        last_name: "maia"
+        last_name: "franca"
         password: 'sha1$aaac6$37fae882af0912ced5577ed0f512b4014b9c8551'
         user_permissions: []
-        username: 'leandroc'
+        username: 'ricardo'
