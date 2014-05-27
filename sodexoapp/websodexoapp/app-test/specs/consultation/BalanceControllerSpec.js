@@ -47,6 +47,8 @@ describe('Controller Balance', function() {
 
         it('should make an AJAX request to the correct URL', function() {
             var controller = Ext.create('Sodexoapp.controller.consultation.Balance');
+            //Setup for add valid text captch field
+            controller.getCaptchField().setValue("fdasfd8");
             controller.buildPost(1);
 
             expect(jasmine.Ajax.requests.mostRecent().url).toContain('/consultation/balance');
