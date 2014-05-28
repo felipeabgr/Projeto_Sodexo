@@ -18,7 +18,6 @@ describe('Model SodexoClient', function(){
         expect(model.get('cpf')).toEqual('24263676360');
         expect(model.get('card_number')).toEqual('69784583651580');
         expect(model.get('daily_value')).toEqual(18.5);
-        expect(model.get('name')).toEqual('Heman'));
-        expect(model.get('user_id')).toEqual(1);
+        expect(model.get('name')).toEqual('Heman');
     });
 });
