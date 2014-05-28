@@ -14,7 +14,8 @@ from consultation.models import SodexoClient
 class SodexoClientHandler(BaseHandler):
     allow_methods = ('GET', 'POST')
     model = SodexoClient
-    fields = ('id', 'name', 'cpf', 'cardNumber', 'dailyValue',
+
+    fields = ('id', 'name', 'cpf', 'card_number', 'daily_value',
               ('user', ('id', 'username', 'email')))
 
     def read(self, request, id=None, start_id=None):
@@ -42,8 +43,8 @@ class SodexoClientHandler(BaseHandler):
             sodexo_client.user = user
             sodexo_client.name = attrs['name']
             sodexo_client.cpf = attrs['cpf']
-            sodexo_client.cardNumber = attrs['cardNumber']
-            sodexo_client.dailyValue = attrs['dailyValue']
+            sodexo_client.card_number = attrs['card_number']
+            sodexo_client.daily_value = attrs['daily_value']
             sodexo_client.save()
 
             send_generic_mail(settings.SODEXOCLIENT_CREATED_EMAIL_SUBJECT,\

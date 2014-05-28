@@ -77,7 +77,6 @@ Ext.define('Sodexoapp.controller.consultation.Profile',{
                 }
             });
         }
-
     }
 
 });

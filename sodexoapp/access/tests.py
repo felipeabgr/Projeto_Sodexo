@@ -30,7 +30,7 @@ class AccessAuthorizationDjangoTest(TestCase):
 
     def test_login_authorized(self):
         ret = self.client.post('/access/login',
-            {'username': 'admin', 'password': 'admin'}, follow=True)
+            {'username': 'marcel', 'password': 'admin'}, follow=True)
         self.assertEquals(ret.status_code, 200, 'Wrong status code.')
         self.assertFalse('error_msg' in ret.context)
 
