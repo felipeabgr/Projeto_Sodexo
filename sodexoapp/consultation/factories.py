@@ -10,8 +10,8 @@ class SodexoClientFactory(factory.DjangoModelFactory):
     user = factory.Sequence(lambda x: 'sodexo_user%d' % x)
     name = factory.Sequence(lambda x: '%duser' % x)
     cpf = factory.Sequence(lambda x: '123.123.123-2%d' % x)
-    cardNumber = factory.Sequence(lambda x: '%d23456789' % x)
-    dailyValue = factory.Sequence(lambda x: '%f' % x)
+    card_number = factory.Sequence(lambda x: '%d23456789' % x)
+    daily_value = factory.Sequence(lambda x: '%f' % x)
 
 
 class UserFactory(factory.DjangoModelFactory):

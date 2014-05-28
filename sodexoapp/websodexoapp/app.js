@@ -52,8 +52,11 @@ Ext.application({
                     xtype: 'container',
                     itemId: 'contentPanel',
                     columnWidth: 0.8,
-                    //items: Ext.create('Sodexoapp.view.consultation.Balance')
-                    items: Ext.create('Sodexoapp.view.consultation.Profile')
+                    items: [
+                        {
+                            xtype: 'balaceConsult'
+                        }
+                    ]
                 }]
             }]
         });
