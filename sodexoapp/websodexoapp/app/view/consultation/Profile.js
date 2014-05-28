@@ -65,12 +65,14 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
+<<<<<<< HEAD
                 width:420,
                 maskRe:/[0-9.]/,
                 minLength: '11',
                 maxLength: '11',
                 maxLengthText:'CPF 11 digitos',
                 minLengthText:'CPF 11 digitos'
+                width:420
             },{
                 xtype:'textfield',
                 itemId:'profilecard',

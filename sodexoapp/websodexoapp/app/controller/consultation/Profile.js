@@ -44,24 +44,24 @@ Ext.define('Sodexoapp.controller.consultation.Profile',{
         userProfile.data.name = this.getName().getValue();
         userProfile.data.cpf = this.getCpf().getValue();
         userProfile.data.card_number = this.getCard().getValue();
-        userProfile.data.daily_value = this.getCpf().getValue();
+        userProfile.data.daily_value = this.getDailyValue().getValue();
         userProfile.data.user_id = user.data;
 
         var data = {
                        name:userProfile.data.name,
                        cpf: userProfile.data.cpf,
-                       card_number: userProfile.data.card_number,
-                       daily_value: userProfile.data.daily_value,
+                       cardNumber: userProfile.data.card_number,
+                       dailyValue: userProfile.data.daily_value,
                        user: {
-                                id:1
-                       //      username: user.data.username,
-                       //      password:user.data.password,
-                       //      email: user.data.email
+                             username: user.data.username,
+                             password:user.data.password,
+                             email: user.data.email
                        }
                    };
 
         if(user.data.password != passwordField.getValue()) {
             passwordField.markInvalid('senhas diferem');
+
         } else if(this.getProfile().getForm().isValid()){
             Ext.Ajax.request({
                 url : '/consultation/sodexoclient',
@@ -69,8 +69,8 @@ Ext.define('Sodexoapp.controller.consultation.Profile',{
                 header:{'Content-Type': 'application/json'},
                 jsonData: data,
                 success: function(response, eOpts){
-                    // var jsonResponse = Ext.JSON.decode(response.responseText);
-                    // window.location = './access/login?report_msg='+jsonResponse.result;
+                     var jsonResponse = Ext.JSON.decode(response.responseText);
+                     window.location = './access/login?report_msg='+jsonResponse.result;
                 },
                 failure: function(response, opts) {
                     console.error(response.statusText);
