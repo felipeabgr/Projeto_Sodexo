@@ -6,6 +6,17 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
     width: 500,
     margin: '30',
 
+    bbar: [
+        '->',
+        {
+            xtype:'button',
+            itemId:'savebutton',
+            text:'Criar Usuario',
+            textAling:'center',
+            action:'save'
+        }
+    ],
+
     initComponent: function(){
         this.items = [
             {
@@ -54,6 +65,13 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
+<<<<<<< HEAD
+                width:420,
+                maskRe:/[0-9.]/,
+                minLength: '11',
+                maxLength: '11',
+                maxLengthText:'CPF 11 digitos',
+                minLengthText:'CPF 11 digitos'
                 width:420
             },{
                 xtype:'textfield',
@@ -63,7 +81,8 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
-                width:420
+                width:420,
+                maskRe:/[0-9.]/
             },{
                 xtype:'textfield',
                 itemId:'profileemail',
@@ -76,26 +95,21 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 margin:'10 0 0 40',
                 width:420
             },{
-                xtype:'textfield',
+                xtype:'numberfield',
                 itemId:'profilevalue',
                 fieldLabel:'Valor Diario',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
-                margin:'10 0 0 40',
+                margin:'10 0 10 40',
                 width:420,
-                maskRe:'^d+(.d)?$/',
-                regexText:'decimais apenas'
-            },,{
-                xtype:'button',
-                itemId:'savebutton',
-                text:'salvar',
-                textAling:'center',
-                action:'save',
-                margin:'10 0 20 40',
-                align:'right'
+                maskRe: /[\d\.]/,
+                minValue: '0.01',
+                maxValue: '100.00',
+                minText:'Valor acimade R$0.01',
+                maxText:'Valor abaixo de R$100,00',
+                hideTrigger: true
             }
-
         ];
 
         this.callParent(arguments);
