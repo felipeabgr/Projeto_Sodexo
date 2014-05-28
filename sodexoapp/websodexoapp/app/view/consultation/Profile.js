@@ -47,31 +47,23 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 width:420,
                 inputType: 'password'
             },{
-                xtype:'numberfield',
+                xtype:'textfield',
                 itemId:'profilecpf',
                 fieldLabel:'CPF:',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
-                width:420,
-                minValue: 0,
-                hideTrigger: true,
-                keyNavEnabled: false,
-                mouseWheelEnabled: false
+                width:420
             },{
-                xtype:'numberfield',
+                xtype:'textfield',
                 itemId:'profilecard',
                 fieldLabel:'N. Cartao',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
-                width:420,
-                minValue: 0,
-                hideTrigger: true,
-                keyNavEnabled: false,
-                mouseWheelEnabled: false
+                width:420
             },{
                 xtype:'textfield',
                 itemId:'profileemail',
