@@ -2,6 +2,10 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
     extend:'Ext.form.Panel',
     alias: 'widget.profile',
 
+    title: 'Criar Usuario',
+    width: 500,
+    margin: '30',
+
     initComponent: function(){
         this.items = [
             {
@@ -11,15 +15,17 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
-                margin:'50 0 0 40'
+                margin:'50 0 0 40',
+                width:420
             },{
                 xtype:'textfield',
                 itemId:'profileuser',
-                fieldLabel:'Usuário:',
+                fieldLabel:'Usuario:',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
-                margin:'10 0 0 40'
+                margin:'10 0 0 40',
+                width:420
             },{
                 xtype:'textfield',
                 itemId:'profilepassword',
@@ -27,7 +33,9 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
-                margin:'10 0 0 40'
+                margin:'10 0 0 40',
+                width:420,
+                inputType: 'password'
             },{
                 xtype:'textfield',
                 itemId:'profilerepassword',
@@ -35,25 +43,35 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
-                margin:'10 0 0 40'
+                margin:'10 0 0 40',
+                width:420,
+                inputType: 'password'
             },{
-                xtype:'textfield',
+                xtype:'numberfield',
                 itemId:'profilecpf',
                 fieldLabel:'CPF:',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
-                // regex:'/^[0-9]/  [0-9]+$  ',
-                // regexText:'Apenas Números'
+                width:420,
+                minValue: 0,
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false
             },{
-                xtype:'textfield',
+                xtype:'numberfield',
                 itemId:'profilecard',
-                fieldLabel:'Nº. Cartão',
+                fieldLabel:'N. Cartao',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
-                margin:'10 0 0 40'
+                margin:'10 0 0 40',
+                width:420,
+                minValue: 0,
+                hideTrigger: true,
+                keyNavEnabled: false,
+                mouseWheelEnabled: false
             },{
                 xtype:'textfield',
                 itemId:'profileemail',
@@ -63,17 +81,19 @@ Ext.define('Sodexoapp.view.consultation.Profile',{
                 msgTarget: 'under',
                 vtype: 'email',
                 vtypeText: 'Formato invalido. Use o formato: "name@sample.com"',
-                margin:'10 0 0 40'
+                margin:'10 0 0 40',
+                width:420
             },{
                 xtype:'textfield',
                 itemId:'profilevalue',
-                fieldLabel:'Valor Diário',
+                fieldLabel:'Valor Diario',
                 allowBlank:false,
                 blankText: 'Campo Obrigatorio',
                 msgTarget: 'under',
                 margin:'10 0 0 40',
-                // regex:'^[0-9]*\\.?[0-9]+$',
-                // regexText:''
+                width:420,
+                maskRe:'^d+(.d)?$/',
+                regexText:'decimais apenas'
             },,{
                 xtype:'button',
                 itemId:'savebutton',
