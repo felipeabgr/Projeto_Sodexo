@@ -1,4 +1,4 @@
-Ext.define('Sodexoapp.view.consultation.Profile',{
+Ext.define('Sodexoapp.view.consultation.SodexoClient',{
     extend:'Ext.form.Panel',
     alias: 'widget.profile',
 

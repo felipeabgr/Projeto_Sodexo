@@ -6,7 +6,7 @@ Ext.application({
 
     controllers:[
          'consultation.Balance',
-         'consultation.Profile'
+         'consultation.SodexoClient'
     ],
 
     launch: function() {

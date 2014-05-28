@@ -5,7 +5,7 @@ Ext.application({
     appFolder: '/static/app',
 
     controllers: [
-        'consultation.Profile'
+        'consultation.SodexoClient'
     ],
 
     launch: function() {
