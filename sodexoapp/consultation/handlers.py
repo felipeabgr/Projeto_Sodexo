@@ -1,15 +1,21 @@
+# encoding: utf-8
 from piston.handler import BaseHandler
-from consultation.models import SodexoClient
+
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-import json
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+from access.mail import send_generic_mail
+from consultation.models import SodexoClient
 
 
 class SodexoClientHandler(BaseHandler):
     allow_methods = ('GET', 'POST')
     model = SodexoClient
-    fields = ('id','name', 'cpf', 'cardNumber', 'dailyValue',
-              ('user', ('id','username', 'password', 'email')))
+    fields = ('id', 'name', 'cpf', 'cardNumber', 'dailyValue',
+              ('user', ('id', 'username', 'email')))
 
     def read(self, request, id=None, start_id=None):
         try:
@@ -18,35 +24,35 @@ class SodexoClientHandler(BaseHandler):
         except ObjectDoesNotExist:
             return {"error 404": "not found"}
 
-    '''def create(self, request, *args, **kwargs):
-        print 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        sodexo_client = request.POST['sodexoclient']
-        print sodexo_client
-
-        created = SodexoClient.objects.create(name=sodexo_client['name'])
-        #print request.POST['user']
-        print 'SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS'
-        print created
-        return HttpResponse(200)'''
-
     def create(self, request, *args, **kwargs):
-        print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         if not self.has_model():
-            print "not has model ................................"
             return HttpResponse(400)
-        print request.data
-        print type(request.data['user'])
-        print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-        attrs = self.flatten_dict(request.data)
-        print attrs
+
         try:
-            inst = self.queryset(request).get(**attrs)
-            print "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-            print inst
-            return HttpResponse(400)
-        except self.model.DoesNotExist:
-            inst = self.model(**attrs)
-            inst.save()
-            return inst
-        except self.model.MultipleObjectsReturned:
-            return HttpResponse(400)
+            attrs = request.data
+            user_data = attrs['user']
+
+            user = User()
+            user.username = user_data['username']
+            user.set_password = user_data['password']
+            user.email = user_data['email']
+            user.save()
+
+            sodexo_client = SodexoClient()
+            sodexo_client.user = user
+            sodexo_client.name = attrs['name']
+            sodexo_client.cpf = attrs['cpf']
+            sodexo_client.cardNumber = attrs['cardNumber']
+            sodexo_client.dailyValue = attrs['dailyValue']
+            sodexo_client.save()
+
+            send_generic_mail(settings.SODEXOCLIENT_CREATED_EMAIL_SUBJECT,\
+               settings.SODEXOCLIENT_CREATED_MESSAGE + user.username,\
+               [user.email])
+
+            return {'result': sodexo_client}
+        except Exception, e:
+            resp = HttpResponse()
+            resp.status_code = 400
+            resp.write(e.message)
+            return resp
