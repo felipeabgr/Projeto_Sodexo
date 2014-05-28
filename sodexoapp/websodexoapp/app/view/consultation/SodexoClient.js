@@ -102,9 +102,9 @@ Ext.define('Sodexoapp.view.consultation.SodexoClient',{
                 width:420,
                 maskRe: /[\d\.]/,
                 minValue: '0.01',
-                maxValue: '100.00',
+                maxValue: '9999.00',
                 minText:'Valor acimade R$0.01',
-                maxText:'Valor abaixo de R$100,00',
+                maxText:'Valor abaixo de R$9999,00',
                 hideTrigger: true
             }
         ];
