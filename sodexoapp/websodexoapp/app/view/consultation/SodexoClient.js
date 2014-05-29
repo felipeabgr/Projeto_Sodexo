@@ -11,7 +11,7 @@ Ext.define('Sodexoapp.view.consultation.SodexoClient',{
         {
             xtype:'button',
             itemId:'savebutton',
-            text:'Criar Usuario',
+            text:'Confirmar',
             textAling:'center',
             action:'save'
         }

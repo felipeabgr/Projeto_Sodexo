@@ -111,6 +111,40 @@ class SodexoClientHandlerTest(TestCase):
             data['user']['username'])
         self.assertEquals(sodexo_client.user.email, data['user']['email'])
 
+    def test_post_sodexo_client_not_unique_cpf(self):
+        user = factories.UserFactory.create(
+            id=1,
+            username="usertest",
+            email='usertest@sodexoapp.com')
+
+        factories.SodexoClientFactory.create(
+            user=user,
+            name='user',
+            cpf='12345678912',
+            card_number='123456789',
+            daily_value=30.00)
+
+        data = {
+            'name': 'leandro',
+            'cpf': '12345678912',
+            'card_number': '12169564',
+            'daily_value': 15.0,
+            'user': {
+                'username': 'leandro',
+                'email': 'leandro@icc.br',
+                'password': 'grs6955'
+                }
+        }
+
+        c = Client()
+        c.login(username='admin', password='admin')
+
+        ret = c.post('/consultation/sodexoclient', json.dumps(data),\
+                                            content_type='application/json')
+        self.assertEquals(ret.status_code, 500,
+            'Status_code incorreto(%d)\n'
+            'Content: \n%s' % (ret.status_code, ret.content))
+
 
 class PerformCalculationViewsTest(TestCase):
 

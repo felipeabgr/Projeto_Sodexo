@@ -14,12 +14,18 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         # The following settings are not used with sqlite3:
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.expanduser('~'), 'sodexoapp.db'),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(os.path.expanduser('~'), 'sodexoapp.db'),
+        # 'USER': '',
+        # 'PASSWORD': '',
+        # 'HOST': '',
+        # 'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sodexoapp',
+        'USER': 'netvision',
+        'PASSWORD': 'ispmbr01',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 

@@ -23,6 +23,7 @@ def getCaptcha(request):
     request.session['JSESSIONID'] = session.cookies['JSESSIONID']
     return HttpResponse(r.content)
 
+
 def calculate_balance(request):
     if request.method not in ('POST'):
         return HttpResponseNotAllowed(
@@ -55,6 +56,7 @@ def calculate_balance(request):
                                                 content_type="text/html")
     return response
 
+
 def get_sodexo_balance(sodexo_client, captcha_text, sodexo_session_id):
     post_data = {
                 'service': '5;1;6',
@@ -81,6 +83,7 @@ def get_sodexo_balance(sodexo_client, captcha_text, sodexo_session_id):
         return clientBalance
     else:
         return HttpResponseBadRequest(error_message.get_text())
+
 
 def perform_calculation(sodexo_client, balance):
     remaining_days = 0
