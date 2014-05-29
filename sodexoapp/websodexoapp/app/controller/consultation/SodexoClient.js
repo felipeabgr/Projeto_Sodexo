@@ -57,6 +57,8 @@ Ext.define('Sodexoapp.controller.consultation.SodexoClient',{
            }
         };
 
+        console.log("Senha: "+user.data.password);
+
         if(user.data.password != passwordField.getValue()) {
             passwordField.markInvalid('senhas diferem');
 
