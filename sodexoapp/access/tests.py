@@ -99,19 +99,19 @@ class UserHandlerTest(TestCase):
         self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
 
     def test_get_one(self):
-        factories.UserFactory.create(
-            username="usertest",
-            email='usertest@sodexoapp.com')
+        user = factories.UserFactory.create(
+            username="userfake",
+            email='userfake@sodexoapp.com')
 
-        ret = self.client.get('/access/user/1')
+        ret = self.client.get('/access/user/'+ str(user.id))
 
         self.assertEquals(ret.status_code, 200,
                           'Status_code incorreto(%d)\n'
                           'Content: \n%s' % (ret.status_code, ret.content))
 
         user = json.loads(ret.content).get('result')
-        self.assertEquals(user.get('username'), 'usertest')
-        self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
+        self.assertEquals(user.get('username'), 'userfake')
+        self.assertEquals(user.get('email'), 'userfake@sodexoapp.com')
 
     def test_get_allowed_fields(self):
         factories.UserFactory.create(

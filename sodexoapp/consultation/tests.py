@@ -65,7 +65,7 @@ class SodexoClientHandlerTest(TestCase):
         self.assertEquals(sodexoclient.get('name'), 'user')
         self.assertEquals(sodexoclient.get('cpf'), '12345678912')
         self.assertEquals(sodexoclient.get('card_number'), '123456789')
-        self.assertEquals(sodexoclient.get('daily_value'), '30')
+        self.assertEquals(sodexoclient.get('daily_value'), '30.00')
 
     def test_get_list_empty(self):
         ret = self.client.get('/consultation/sodexoclient')
