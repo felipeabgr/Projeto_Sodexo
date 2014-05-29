@@ -32,9 +32,6 @@ class SodexoClientHandler(BaseHandler):
         try:
             attrs = request.data
             user_data = attrs['user']
-            print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-            print user_data['password']
-
             user = User()
             user.username = user_data['username']
             user.set_password(user_data['password'])

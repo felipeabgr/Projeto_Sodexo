@@ -32,49 +32,38 @@ Ext.define('Sodexoapp.controller.consultation.SodexoClient',{
     },
 
     saveData: function(button){
-        var user = Ext.create('Sodexoapp.model.access.User');
-        user.data.username = this.getUsername().getValue();
-        user.data.password = this.getPassword().getValue();
-        user.data.email = this.getEmail().getValue();
-        var passwordField = this.getRePassword();
+        var rePasswordField = this.getRePassword();
+        var passwordField = this.getPassword();
 
-        var userProfile = Ext.create('Sodexoapp.model.consultation.SodexoClient');
-        userProfile.data.name = this.getName().getValue();
-        userProfile.data.cpf = this.getCpf().getValue();
-        userProfile.data.card_number = this.getCard().getValue();
-        userProfile.data.daily_value = this.getDailyValue().getValue();
-        userProfile.data.user_id = user.data;
-
-        var data = {
-           name:userProfile.data.name,
-           cpf: userProfile.data.cpf,
-           card_number: userProfile.data.card_number,
-           daily_value: userProfile.data.daily_value,
-           user: {
-                 username: user.data.username,
-                 password:user.data.password,
-                 email: user.data.email
-           }
-        };
-
-        console.log("Senha: "+user.data.password);
-
-        if(user.data.password != passwordField.getValue()) {
+        if(passwordField.getValue() != rePasswordField.getValue()) {
             passwordField.markInvalid('senhas diferem');
 
         } else if(this.getProfile().getForm().isValid()){
+            var data = {
+               name:this.getName().getValue(),
+               cpf: this.getCpf().getValue(),
+               card_number: this.getCard().getValue(),
+               daily_value: this.getDailyValue().getValue(),
+               user: {
+                    username: this.getUsername().getValue(),
+                    password: passwordField.getValue(),
+                    email: this.getEmail().getValue()
+               }
+            };
+
             Ext.Ajax.request({
                 url : '/consultation/sodexoclient',
                 method: 'POST',
                 header:{'Content-Type': 'application/json'},
                 jsonData: data,
+                scope: this,
                 success: function(response, eOpts){
                     var msgSuccess = Ext.String.format("O seu usuário: {0} foi criado com sucesso.\n"+
-                        "Você recebeu um email confirmando o seu cadastro.",user.data.username);
-                    window.location = './access/login?report_msg='+msgSuccess;
+                        "Você recebeu um email confirmando o seu cadastro.", this.getName().getValue());
+                    window.location = './access/login?report_msg='+ msgSuccess;
                 },
                 failure: function(response, opts) {
-                    console.log(response.responseText);
+                    console.error(response.responseText);
                     var msgError = "Ocorreu uma falha ao criar seu usuário. "+
                         "Por favor, entre em contato com o administrador do sistema.";
                     window.location = './access/login?error_msg='+msgError;
@@ -92,7 +81,6 @@ Ext.define('Sodexoapp.controller.consultation.SodexoClient',{
                 userField.markInvalid('Usuário já existente');
             }
         },this);
-
         store.filter('username',userField.getValue());
         store.load();
     },
@@ -106,7 +94,6 @@ Ext.define('Sodexoapp.controller.consultation.SodexoClient',{
                 emailField.markInvalid('Email já existente');
             }
         },this);
-
         store.filter('email',emailField.getValue());
         store.load();
     }
