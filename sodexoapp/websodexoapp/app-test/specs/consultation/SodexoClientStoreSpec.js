@@ -83,14 +83,12 @@ describe('Store SodexoClient', function() {
         });
 
         it('should filter by CPF field', function() {
-            debugger;
             var idDm = jasmine.createSpy("success");
             var dataLength = jasmine.createSpy("success");
 
             var store = Ext.create('Sodexoapp.store.consultation.SodexoClients');
 
             store.on('load', function(store){
-                debugger;
                 var sodexoclientFake = store.data.items[0].data;
                 dataLength(store.data.length);
                 idDm(sodexoclientFake.id);
