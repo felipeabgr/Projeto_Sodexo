@@ -14,7 +14,8 @@ from consultation.models import SodexoClient
 class SodexoClientHandler(BaseHandler):
     allow_methods = ('GET', 'POST')
     model = SodexoClient
-    fields = ('id', 'name', 'cpf', 'cardNumber', 'dailyValue',
+
+    fields = ('id', 'name', 'cpf', 'card_number', 'daily_value',
               ('user', ('id', 'username', 'email')))
 
     def read(self, request, id=None, start_id=None):
@@ -26,15 +27,14 @@ class SodexoClientHandler(BaseHandler):
 
     def create(self, request, *args, **kwargs):
         if not self.has_model():
-            return HttpResponse(400)
+            return HttpResponse(400, "The SodexoClient model is required.")
 
         try:
             attrs = request.data
             user_data = attrs['user']
-
             user = User()
             user.username = user_data['username']
-            user.set_password = user_data['password']
+            user.set_password(user_data['password'])
             user.email = user_data['email']
             user.save()
 
@@ -42,8 +42,8 @@ class SodexoClientHandler(BaseHandler):
             sodexo_client.user = user
             sodexo_client.name = attrs['name']
             sodexo_client.cpf = attrs['cpf']
-            sodexo_client.cardNumber = attrs['cardNumber']
-            sodexo_client.dailyValue = attrs['dailyValue']
+            sodexo_client.card_number = attrs['card_number']
+            sodexo_client.daily_value = attrs['daily_value']
             sodexo_client.save()
 
             send_generic_mail(settings.SODEXOCLIENT_CREATED_EMAIL_SUBJECT,\
@@ -53,6 +53,6 @@ class SodexoClientHandler(BaseHandler):
             return {'result': sodexo_client}
         except Exception, e:
             resp = HttpResponse()
-            resp.status_code = 400
-            resp.write(e.message)
+            resp.status_code = 500
+            resp.write(str(e))
             return resp
