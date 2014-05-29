@@ -26,7 +26,6 @@ describe('Store SodexoClient', function() {
             var idDm = jasmine.createSpy("success");
             var cpfDm = jasmine.createSpy("success");
             var cardNumberDm = jasmine.createSpy("sucess");
-            var userIdDM = jasmine.createSpy("success");
             var dailyValueDm = jasmine.createSpy("success");
 
             var store = Ext.create('Sodexoapp.store.consultation.SodexoClients');
@@ -36,7 +35,6 @@ describe('Store SodexoClient', function() {
                 idDm(sodexoclientFake.id);
                 cpfDm(sodexoclientFake.cpf);
                 cardNumberDm(sodexoclientFake.card_number);
-                userIdDM(sodexoclientFake.user_id);
                 dailyValueDm(sodexoclientFake.daily_value);
             });
 
@@ -52,8 +50,7 @@ describe('Store SodexoClient', function() {
                                        "id: '1',"+
                                        "cpf: '24263676360',"+
                                        "card_number: '6598264110258',"+
-                                       "daily_value: '19.6',"+
-                                       "user_id: '1'}"+
+                                       "daily_value: '19.6'}"+
                                 "]}"
             });
 
@@ -85,7 +82,8 @@ describe('Store SodexoClient', function() {
             expect(dataLength).toHaveBeenCalledWith(0);
         });
 
-        it('should filter by user id field', function() {
+        it('should filter by CPF field', function() {
+            debugger;
             var idDm = jasmine.createSpy("success");
             var dataLength = jasmine.createSpy("success");
 
@@ -98,7 +96,7 @@ describe('Store SodexoClient', function() {
                 idDm(sodexoclientFake.id);
             });
 
-            store.filter('user_id',2);
+            store.filter('cpf','43536100317');
             store.load();
 
             var mockedRequest = jasmine.Ajax.requests.mostRecent();
@@ -111,14 +109,12 @@ describe('Store SodexoClient', function() {
                                        "id: '1',"+
                                        "cpf: '24263676360',"+
                                        "card_number: '6598264110258',"+
-                                       "daily_value: '19.6',"+
-                                       "user_id: '1'},"+
+                                       "daily_value: '19.6'},"+
                                     "{"+
                                        "id: '2',"+
                                        "cpf: '43536100317',"+
                                        "card_number: '0455845012585',"+
-                                       "daily_value: '15.5',"+
-                                       "user_id: '2'}"+
+                                       "daily_value: '15.5'}"+
                                 "]}"
             });
 
