@@ -10,7 +10,7 @@ Ext.application({
             items: [
                 {
                     xtype: 'panel',
-                    title: 'Users',
+                    title: 'Sodexo',
                     html : 'List of users will go here'
                 }
             ]
