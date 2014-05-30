@@ -39,7 +39,7 @@ def vejo_mensagem_usuario_ou_senha_invalido(context):
 	context.driver.is_text_present('Usuário ou senha inválido', wait_time=2)
 
 def clico_link_esqueci_senha(context):
-	link = context.driver.find_by_xpath('/html/body/div/div/form/div[1]/a')
+	link = context.driver.find_by_xpath('/html/body/div/div/form/div[1]/div[1]/a')
 	link.click()
 
 def digito_email_valido(context):
