@@ -14,18 +14,18 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         # The following settings are not used with sqlite3:
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(os.path.expanduser('~'), 'sodexoapp.db'),
-        # 'USER': '',
-        # 'PASSWORD': '',
-        # 'HOST': '',
-        # 'PORT': '',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sodexoapp',
-        'USER': 'netvision',
-        'PASSWORD': 'ispmbr01',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(os.path.expanduser('~'), 'sodexoapp.db'),
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'sodexoapp',
+        # 'USER': 'netvision',
+        # 'PASSWORD': 'ispmbr01',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432'
     }
 }
 
@@ -132,6 +132,7 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )

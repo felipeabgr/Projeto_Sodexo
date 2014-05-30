@@ -103,7 +103,7 @@ class UserHandlerTest(TestCase):
             username="userfake",
             email='userfake@sodexoapp.com')
 
-        ret = self.client.get('/access/user/'+ str(user.id))
+        ret = self.client.get('/access/user/' + str(user.id))
 
         self.assertEquals(ret.status_code, 200,
                           'Status_code incorreto(%d)\n'

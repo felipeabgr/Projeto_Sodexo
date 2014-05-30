@@ -8,6 +8,8 @@ from django.test.client import Client
 from consultation.models import SodexoClient
 from consultation import factories
 from consultation import views
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class SodexoClientTetsCase(TestCase):
@@ -47,7 +49,7 @@ class SodexoClientHandlerTest(TestCase):
             name='user',
             cpf='12345678912',
             card_number='123456789',
-            daily_value=30.00)
+            daily_value=30)
 
         ret = self.client.get('/consultation/sodexoclient')
 
@@ -65,7 +67,7 @@ class SodexoClientHandlerTest(TestCase):
         self.assertEquals(sodexoclient.get('name'), 'user')
         self.assertEquals(sodexoclient.get('cpf'), '12345678912')
         self.assertEquals(sodexoclient.get('card_number'), '123456789')
-        self.assertEquals(sodexoclient.get('daily_value'), '30.00')
+        self.assertEquals(sodexoclient.get('daily_value'), '30')
 
     def test_get_list_empty(self):
         ret = self.client.get('/consultation/sodexoclient')

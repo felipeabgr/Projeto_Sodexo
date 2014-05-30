@@ -1,6 +1,7 @@
 # encoding: utf-8
 from piston.handler import BaseHandler
 
+from django.db import transaction
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
@@ -25,6 +26,7 @@ class SodexoClientHandler(BaseHandler):
         except ObjectDoesNotExist:
             return {"error 404": "not found"}
 
+    @transaction.commit_on_success
     def create(self, request, *args, **kwargs):
         if not self.has_model():
             return HttpResponse(400, "The SodexoClient model is required.")
