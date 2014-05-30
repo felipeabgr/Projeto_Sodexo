@@ -27,6 +27,9 @@ Ext.define('Sodexoapp.controller.consultation.SodexoClient',{
             },
             'profile textfield[itemId=profileemail]':{
                 blur: this.emailExists
+            },
+            'profile textfield[itemId=profilecpf]':{
+                blur: this.cpfExists
             }
         });
     },
@@ -95,6 +98,19 @@ Ext.define('Sodexoapp.controller.consultation.SodexoClient',{
             }
         },this);
         store.filter('email',emailField.getValue());
+        store.load();
+    },
+
+    cpfExists: function(){
+        var cpfField = this.getCpf();
+
+        var store = Ext.create('Sodexoapp.store.consultation.SodexoClients');
+        store.on('load', function(store){
+            if(store.getCount() > 0) {
+                cpfField.markInvalid('CPF já existente');
+            }
+        },this);
+        store.filter('cpf',cpfField.getValue());
         store.load();
     }
 });
