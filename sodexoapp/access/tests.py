@@ -30,7 +30,7 @@ class AccessAuthorizationDjangoTest(TestCase):
 
     def test_login_authorized(self):
         ret = self.client.post('/access/login',
-            {'username': 'admin', 'password': 'admin'}, follow=True)
+            {'username': 'marcel', 'password': 'admin'}, follow=True)
         self.assertEquals(ret.status_code, 200, 'Wrong status code.')
         self.assertFalse('error_msg' in ret.context)
 
@@ -64,7 +64,7 @@ class AccessAuthorizationDjangoTest(TestCase):
     @patch('access.views.authenticate')
     def test_gets_logged_in_session_if_authenticate_returns_a_user(
         self, mock_authenticate):
-        user = User.objects.get(email='admin@example.com')
+        user = User.objects.get(email='leandroc@inatel.br')
         mock_authenticate.return_value = user
         user.backend = ''
         self.client.post('/access/login',

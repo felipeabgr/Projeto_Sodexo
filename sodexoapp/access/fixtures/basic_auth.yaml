@@ -21,7 +21,7 @@
     pk: 2
     fields:
         date_joined: '2014-05-05 12:40:21'
-        email: 'leandroc@inatel.br'
+        email: 'tiagoh@inatel.br'
         first_name: "ricardo"
         groups: []
         is_active: true
