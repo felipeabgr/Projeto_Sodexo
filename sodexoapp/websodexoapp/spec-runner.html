@@ -14,19 +14,25 @@
   <script type="text/javascript" src="app-test/lib/jasmine-2.0.0/boot.js"></script>
   <script type="text/javascript" src="app-test/lib/jasmine-2.0.0/mock-ajax.js"></script>
   <!--jquery reference-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="app-test/lib/jquery-2.1.1.min.js"></script>
 
   <script type="text/javascript" src="app-test/lib/mock-ajax.js"></script>
   <script type="text/javascript" src="app-test/lib/jasmine-jquery.js"></script>
 
-  <!-- include source files here... -->
+  <!-- Tests for access module -->
   <script type="text/javascript" src="app-test/specs/BasicAssumptionsSpec.js"></script>
-  <script type="text/javascript" src="app-test/specs/NewPasswordControllerSpec.js"></script>
-  <script type="text/javascript" src="app-test/specs/UserModelSpec.js"></script>
-  <script type="text/javascript" src="app-test/specs/UserStoreSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/access/NewPasswordControllerSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/access/UserModelSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/access/UserStoreSpec.js"></script>
 
+  <!-- Tests for consultation module -->
+  <script type="text/javascript" src="app-test/specs/consultation/SodexoClientStoreSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/consultation/BalanceModelSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/consultation/BalanceViewSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/consultation/SodexoClientModelSpec.js"></script>
+  <script type="text/javascript" src="app-test/specs/consultation/BalanceControllerSpec.js"></script>
 
-  <!--est launcher -->
+  <!-- Test launcher -->
   <script type="text/javascript" src="app-test.js"></script>
 
 </head>
