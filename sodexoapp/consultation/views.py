@@ -40,8 +40,8 @@ def calculate_balance(request):
     captcha_text = jsonData['captcha_text']
 
     if not user_id or not captcha_text:
-        return HttpResponseBadRequest(
-            ("Erro: Os parâmetros enviados estão incorretos"))
+        return HttpResponseBadRequest(\
+            "Erro: Os parâmetros enviados estão incorretos")
 
     sodexo_client = SodexoClient.objects.get(user=user_id)
     session_id = request.session['JSESSIONID']

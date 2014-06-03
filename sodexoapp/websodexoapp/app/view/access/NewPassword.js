@@ -2,7 +2,7 @@ Ext.define('Sodexoapp.view.access.NewPassword', {
     extend:'Ext.panel.Panel',
     alias:'widget.newpassword',
 
-    title: 'Password Recover',
+    title: 'Solicitar Nova Senha',
     width: 500,
     height:150,
     margin: '30',
@@ -13,7 +13,7 @@ Ext.define('Sodexoapp.view.access.NewPassword', {
         {
             xtype:'button',
             itemId:'sendEmailBtn',
-            text:'Enviar',
+            text:'Confirmar',
             textAling:'center',
             action:'send'
         }

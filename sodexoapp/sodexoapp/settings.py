@@ -19,28 +19,39 @@ DATABASES = {
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
-        'PORT': '',
+        'PORT': ''
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'sodexoapp',
+        # 'USER': 'netvision',
+        # 'PASSWORD': 'ispmbr01',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432'
     }
 }
 
 
-# EMAIL_USE_TLS = False
-# EMAIL_HOST = '192.168.10.11'
-# #EMAIL_HOST_USER = ''
-# #EMAIL_HOST_PASSWORD = ''
-# EMAIL_PORT = 25
+EMAIL_USE_TLS = False
+EMAIL_HOST = '192.168.10.11'
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 25
 
-# SENDMAIL_FROM_ADDRESS = 'no-reply@inatel.br'
+SENDMAIL_FROM_ADDRESS = 'no-reply@inatel.br'
 
 PASSWORD_RECOVER_EMAIL_SUBJECT = 'Sodexo new password'
-
 PASSWORD_RECOVER_EMAIL_MESSAGE = 'Para acessar o Sodexoapp utilize a nova ' \
                                  'senha gerada pelo sistema: '
-EMAIL_HOST = 'smtp.ispm.com.br'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'marcel.portela@ispm.com.br'
-EMAIL_HOST_PASSWORD = '123456'
-EMAIL_USE_TLS = False
+
+SODEXOCLIENT_CREATED_EMAIL_SUBJECT = 'Sodexo App - Usuario criado com sucesso'
+SODEXOCLIENT_CREATED_MESSAGE = 'Seu cadastro para acesso ao Sodexoapp ' \
+                            'foi concluido com sucesso. Utilize o seguinte ' \
+                            'username para acesso: '
+
+# EMAIL_HOST = 'smtp.ispm.com.br'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = 'marcel.portela@ispm.com.br'
+# EMAIL_HOST_PASSWORD = '123456'
+# EMAIL_USE_TLS = False
 
 SENDMAIL_FROM_ADDRESS = 'desenvolvimento@ispm.com.br'
 
@@ -122,6 +133,7 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )

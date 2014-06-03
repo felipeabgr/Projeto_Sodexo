@@ -39,3 +39,7 @@ def do_logout(request):
 
 def recover_password(request):
     return render(request, 'pwrecover.html', content_type='text/html')
+
+
+def create_account(request):
+    return render(request, 'createaccount.html', content_type='text/html')

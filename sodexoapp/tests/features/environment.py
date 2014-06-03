@@ -23,6 +23,6 @@ def before_feature(context, feature):
 #    context.driver.implicitly_wait(30)
 #    context.driver.maximize_window()
 
-#def after_feature(context, feature):
-#   context.driver.quit()
+def after_feature(context, feature):
+	context.driver.quit()
 

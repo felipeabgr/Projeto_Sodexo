@@ -5,11 +5,11 @@ from django.db import models
 
 class SodexoClient(models.Model):
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
     name = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11)
-    card_number = models.CharField(max_length=15)
-    daily_value = models.DecimalField(max_digits=4, decimal_places=2,
+    cpf = models.CharField(max_length=11, unique=True)
+    card_number = models.CharField(max_length=30)
+    daily_value = models.DecimalField(max_digits=6, decimal_places=2,
                                                                 default=00.00)
 
     def __unicode__(self):

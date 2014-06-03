@@ -18,7 +18,7 @@
             {% endif %}
 
             <div class='login-container'>
-                <div class='header'>Login
+                <div class='header'>Acesso
                 </div>
                 <br></br>
                 <form method="POST">
@@ -28,8 +28,13 @@
                     <label for='password'>{% trans 'Senha' %}</label>
                     <input class='textfield' type="password" name="password" id="password" />
                     <br />
-                        <div align="center">
-                            <a href="/access/passwordrecover">Esqueci minha senha</a> 
+                        <div style='width: 150px; margin: 5px 0 0 190px;'>
+                            <div align="left">
+                                <a href="/access/passwordrecover">Esqueci minha senha</a>
+                            </div>
+                            <div align="left">
+                                <a href="/access/createaccount">Criar conta</a>
+                            </div>
                         </div>
                     <br />
                     <div class='bottom'>

@@ -37,7 +37,6 @@ class AccessAuthorizationDjangoTest(TestCase):
     def test_login_not_authorized(self):
         ret = self.client.post('/access/login',
             {'username': 'admin', 'password': 'ssss'})
-
         self.assertEquals(ret.status_code, 200, 'Wrong status code.')
         self.assertTrue('error_msg' in ret.context)
 
@@ -68,7 +67,7 @@ class AccessAuthorizationDjangoTest(TestCase):
         mock_authenticate.return_value = user
         user.backend = ''
         self.client.post('/access/login',
-            {'username': 'adasmin', 'password': 'admin'})
+            {'username': 'marcel', 'password': 'admin'})
         self.assertEqual(self.client.session[SESSION_KEY], user.pk)
 
     @patch('access.views.authenticate')
@@ -100,19 +99,19 @@ class UserHandlerTest(TestCase):
         self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
 
     def test_get_one(self):
-        factories.UserFactory.create(
-            username="usertest",
-            email='usertest@sodexoapp.com')
+        user = factories.UserFactory.create(
+            username="userfake",
+            email='userfake@sodexoapp.com')
 
-        ret = self.client.get('/access/user/1')
+        ret = self.client.get('/access/user/' + str(user.id))
 
         self.assertEquals(ret.status_code, 200,
                           'Status_code incorreto(%d)\n'
                           'Content: \n%s' % (ret.status_code, ret.content))
 
         user = json.loads(ret.content).get('result')
-        self.assertEquals(user.get('username'), 'usertest')
-        self.assertEquals(user.get('email'), 'usertest@sodexoapp.com')
+        self.assertEquals(user.get('username'), 'userfake')
+        self.assertEquals(user.get('email'), 'userfake@sodexoapp.com')
 
     def test_get_allowed_fields(self):
         factories.UserFactory.create(

@@ -19,9 +19,9 @@ describe('Controller NewPassword', function() {
         expect(myView).toBeDefined();
     });
 
-    it('should ref MyView button send', function() {
+    it('should ref MyView button confirm', function() {
         var btnsend = ctr.getMySendButton();
-        expect(btnsend.text).toBe('Enviar');
+        expect(btnsend.text).toBe('Confirmar');
     });
 
     it('sendEmail method should be called if it exist', function () {

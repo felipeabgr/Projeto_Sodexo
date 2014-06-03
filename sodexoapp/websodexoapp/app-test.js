@@ -9,7 +9,9 @@ Ext.application({
     appFolder: 'app',
 
     controllers: [
-        'access.NewPassword'
+        'access.NewPassword',
+        'consultation.SodexoClient',
+        'consultation.Balance'
     ],
 
     autoCreateViewport: false
