@@ -46,13 +46,14 @@ SODEXOCLIENT_CREATED_EMAIL_SUBJECT = 'Sodexo App - Usuario criado com sucesso'
 SODEXOCLIENT_CREATED_MESSAGE = 'Seu cadastro para acesso ao Sodexoapp ' \
                             'foi concluido com sucesso. Utilize o seguinte ' \
                             'username para acesso: '
+
 # EMAIL_HOST = 'smtp.ispm.com.br'
 # EMAIL_PORT = 25
 # EMAIL_HOST_USER = 'marcel.portela@ispm.com.br'
 # EMAIL_HOST_PASSWORD = '123456'
 # EMAIL_USE_TLS = False
 
-# PLUGIN_SENDMAIL_FROM_ADDRESS = 'desenvolvimento@ispm.com.br'
+SENDMAIL_FROM_ADDRESS = 'desenvolvimento@ispm.com.br'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
